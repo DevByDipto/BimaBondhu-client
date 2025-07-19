@@ -17,6 +17,7 @@ import QuotePage from "../pages/quotePage/QuotePage";
 import ApplicationForm from "../pages/applicationForm/ApplicationForm";
 import ApplicationDetails from "../pages/shared/applicationsDetails/ApplicationDetails";
 import ManageApplications from "../pages/adminDashBoard/manageApplications/ManageApplications";
+import MyPolicies from "../pages/customerDashboard/myPolicies/MyPolicies";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
   path:'manage-applications',
   element:<ManageApplications></ManageApplications>
 
+},
+{
+  path:'my-policies',
+  element:<MyPolicies></MyPolicies>
 }
     ]
   }

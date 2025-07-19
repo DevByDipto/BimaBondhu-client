@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 const useUserRole = () => {
     const {user} = useAuth()
     const email = user.email
-    console.log(email);
+    // console.log(email);
     
   const axiosSecure = useAxiosSecure();
 

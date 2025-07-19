@@ -64,7 +64,7 @@ const [policiesData,setPoliciesData] = useState()
     }
   };
   const categories = data?.data?.map((p)=> p.category)
-console.log(categories);
+// console.log(categories);
   
 const handleSelect = async(e)=>{
   // setSelectedCategory(e.target.value)
@@ -112,12 +112,13 @@ const handleSelect = async(e)=>{
                 className="rounded-2xl shadow-md hover:shadow-xl transition p-4 border border-gray-200"
                 onClick={()=>handleClick(policy._id)}
               >
-                
-                <img
-                  src={policy.image}
-                  alt={policy.title}
-                  className="w-full h-48 object-cover rounded-lg"
-                />
+                {policy?.image && (
+  <img
+    src={policy.image}
+    alt={policy?.title}
+    className="w-full h-48 object-cover rounded-lg"
+  />
+)}
                 <div className="mt-4">
                   <h3 className="text-xl font-semibold text-gray-800">
                     {policy.title}

@@ -16,7 +16,7 @@ import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
   const { role, roleLoder } = useUserRole();
-  console.log(role);
+  // console.log(role);
   
   if (roleLoder) {
     return "......loding";
@@ -77,6 +77,12 @@ const DashboardLayout = () => {
               <FaRegUser className="mr-2" /> Profile
             </NavLink>
           </li>
+          <li>
+            <NavLink to="my-policies">
+              <FaRegUser className="mr-2" /> My Policies
+            </NavLink>
+          </li>
+
           {/* rider role nav items */}
           {/* {role == "agent" && ( */}
             <>
