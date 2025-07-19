@@ -67,70 +67,26 @@ const DashboardLayout = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="my-parcels">
-              <FaBoxOpen className="mr-2" /> My Parcels
+            <NavLink to="manage-policies">
+              <FaHome className="mr-2" /> Manage Policies
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/dashboard/paymetHistory">
-              <FaHistory className="mr-2" /> Payment History
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/track">
-              <FaMapMarkedAlt className="mr-2" /> Track
-            </NavLink>
-          </li>
+          
           <li>
             <NavLink to="/dashboard/profile">
               <FaRegUser className="mr-2" /> Profile
             </NavLink>
           </li>
           {/* rider role nav items */}
-          {role == "rider" && (
+          {role == "agent" && (
             <>
-              <li>
-                <NavLink to="/dashboard/pending-deliveries">
-                  <MdPending className="mr-2" />
-                  Pending Deliveris
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/completed-deliveries">
-                  <MdPending className="mr-2" />
-                  Completed Deliveris
-                </NavLink>
-              </li>
+            
             </>
           )}
           {/* admin role nav items */}
           {role == "admin" && (
             <>
-              {/* ✅ Active Riders */}
-              <li>
-                <NavLink to="/dashboard/active-riders">
-                  <FaUserCheck className="mr-2" /> Active Riders
-                </NavLink>
-              </li>
-
-              {/* 🟡 Pending Riders */}
-              <li>
-                <NavLink to="/dashboard/pending-riders">
-                  <FaUserClock className="mr-2" /> Pending Riders
-                </NavLink>
-              </li>
-              {/* 🔵 Admin Panel */}
-              <li>
-                <NavLink to="/dashboard/admin">
-                  <FaUserShield className="mr-2" /> Admin
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/assignRider">
-                  <FaUserPlus className="mr-1" />
-                  Assign Rider
-                </NavLink>
-              </li>
+             
             </>
           )}
         </ul>

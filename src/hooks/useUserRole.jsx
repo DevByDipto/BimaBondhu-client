@@ -18,8 +18,6 @@ const useUserRole = () => {
     },
   });
 
-
-
   return { role, roleLoder, refetch };
 };
 

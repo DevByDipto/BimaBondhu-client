@@ -26,12 +26,20 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to="/policies"
+        to="/allpolicies"
         className={({ isActive }) =>
           isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"
         }
       >
         All Policies
+      </NavLink>
+       <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"
+        }
+      >
+        Dashboard
       </NavLink>
       <NavLink
         to="/blogs"
@@ -41,6 +49,7 @@ const Navbar = () => {
       >
         Blog
       </NavLink>
+     
       {user && (
         <NavLink
           to="/dashboard"
