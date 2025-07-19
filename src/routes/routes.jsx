@@ -15,7 +15,8 @@ import PoliciesDetails from "../pages/AllPolicies/PoliciesDetails";
 import ManagePolicies from "../pages/adminDashBoard/managePolicies/ManagePolicies";
 import QuotePage from "../pages/quotePage/QuotePage";
 import ApplicationForm from "../pages/applicationForm/ApplicationForm";
-import ManageApplications from "../pages/adminDashBoard/managePolicies/manageApplications/ManageApplications";
+import ApplicationDetails from "../pages/shared/applicationsDetails/ApplicationDetails";
+import ManageApplications from "../pages/adminDashBoard/manageApplications/ManageApplications";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
     {
       path:'/application-form/:policyId',
       element:<ApplicationForm></ApplicationForm>
+    },
+    {
+      path:'/application-details/:applicationId',
+      element:<ApplicationDetails></ApplicationDetails>
     },
     {
       path:'/get-quote/:id',
