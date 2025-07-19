@@ -1,0 +1,186 @@
+import Swal from "sweetalert2";
+import React, { useState } from "react";
+import { useParams } from "react-router";
+import Select from "react-select";
+import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
+import toast from "react-hot-toast";
+
+const healthOptions = [
+  { value: "diabetes", label: "Diabetes" },
+  { value: "heart_disease", label: "Heart Disease" },
+  { value: "smoking", label: "Smoking" },
+  { value: "asthma", label: "Asthma" },
+];
+
+const ApplicationForm = () => {
+  const { policyId } = useParams();
+  const { user, loading } = useAuth();
+  // console.log(loading, user.email, { policyId });
+
+  const axiosInstance = useAxios();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    nid: "",
+    nomineeName: "",
+    nomineeRelation: "",
+    health: [],
+  });
+
+  if (loading) {
+    return "loding.....";
+  }
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleHealthChange = (selectedOptions) => {
+    const values = selectedOptions.map((opt) => opt.value);
+    setFormData({ ...formData, health: values });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const applicationData = {
+      ...formData,
+      policyId,
+      email: user?.email || "",
+      status: "Pending",
+    };
+
+    console.log(applicationData);
+
+   try {
+  const res = await axiosInstance.post("/applications", applicationData);
+  
+  Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "application added successfull",
+  showConfirmButton: false,
+  timer: 1500
+});
+  // toast.success('application added successfull')
+// alert("application added successfull")
+  console.log("Application submitted:", res.data);
+  
+} catch (err) {
+  console.error(err);
+  Swal.fire({
+    title: 'Error!',
+    text: 'Submission failed!',
+    icon: 'error',
+    confirmButtonText: 'Try Again'
+  });
+}
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-10">
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Apply for Insurance
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-5  p-6 rounded-xl shadow"
+      >
+        {/* Applicant Info */}
+        <div>
+          <label className="block font-medium mb-1">Name</label>
+          <input
+            type="text"
+            name="name"
+            className="w-full border rounded p-2"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label className="block font-medium mb-1">Email</label>
+          <input
+            type="email"
+            name="email"
+            className="w-full border rounded p-2 "
+            value={user?.email}
+            readOnly
+          />
+        </div>
+        <div>
+          <label className="block font-medium mb-1">Address</label>
+          <input
+            type="text"
+            name="address"
+            className="w-full border rounded p-2"
+            value={formData.address}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label className="block font-medium mb-1">NID Number</label>
+          <input
+            type="text"
+            name="nid"
+            className="w-full border rounded p-2"
+            value={formData.nid}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* Nominee */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-medium mb-1">Nominee Name</label>
+            <input
+              type="text"
+              name="nomineeName"
+              className="w-full border rounded p-2"
+              value={formData.nomineeName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="block font-medium mb-1">Relationship</label>
+            <input
+              type="text"
+              name="nomineeRelation"
+              className="w-full border rounded p-2"
+              value={formData.nomineeRelation}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        {/* Health Disclosure */}
+        <div>
+          <label className="block font-medium mb-1">Health Disclosure</label>
+          <Select
+            isMulti
+            options={healthOptions}
+            className="basic-multi-select text-black"
+            classNamePrefix="select"
+            onChange={handleHealthChange}
+          />
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700"
+        >
+          Submit Application
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default ApplicationForm;

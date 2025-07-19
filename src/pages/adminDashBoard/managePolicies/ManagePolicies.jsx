@@ -36,7 +36,7 @@ const ManagePolicies = () => {
   // ✅ add mutation
   const addMutation = useMutation({
     mutationFn: async (newPolicy) => {
-        console.log(newPolicy);
+        console.log({newPolicy});
         
     //   const formData = new FormData();
     //   Object.entries(newPolicy).forEach(([key, value]) => {
@@ -44,8 +44,8 @@ const ManagePolicies = () => {
     //   });
     //   console.log(formData);
       
-    //   const res = await axiosSecure.post("/policies", formData);
-    //   return res.data;
+      const res = await axiosSecure.post("/policies", newPolicy);
+      return res.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["policies"]);

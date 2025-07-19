@@ -1,11 +1,11 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
 
 const PoliciesDetails = () => {
   const { id } = useParams(); // 👉 URL থেকে ID নেওয়া হচ্ছে
   const axiosInstance = useAxios(); // 👉 axios instance
-
+const navigation = useNavigate()
   // 📦 fetch policy by ID
   const { data: policy = {}, isLoading } = useQuery({
     queryKey: ['policy', id],
@@ -95,7 +95,7 @@ const PoliciesDetails = () => {
       {/* CTA Button */}
       <div className="text-right pt-4">
         <button
-          onClick={() => window.location.href = `/get-quote/${policy._id}`}
+          onClick={() => navigation(`/get-quote/${policy._id}`) }
           className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition"
         >
           Get Quote

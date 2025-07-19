@@ -42,11 +42,26 @@ const EditPolicyModal = ({ policy, isOpen, onClose, onSubmit }) => {
             <input {...register("image")} className="input input-bordered w-full" />
           </div>
 
+ <div className="md:col-span-2">
+            <label className="label">Short Description</label>
+            <textarea {...register("short_description")} className="textarea textarea-bordered w-full" />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="label">Full Description</label>
+            <textarea {...register("full_description")} className="textarea textarea-bordered w-full" />
+          </div>
+
           <div>
             <label className="label">Coverage Amount</label>
             <input type="number" {...register("coverage_amount")} className="input input-bordered w-full" />
           </div>
 
+  <div>
+            <label className="label">Term Length (Years)</label>
+            <input type="number" {...register("term_length_years")} className="input input-bordered w-full" />
+          </div>
+          
           <div>
             <label className="label">Premium / Month</label>
             <input type="number" {...register("premium_per_month")} className="input input-bordered w-full" />
@@ -57,20 +72,9 @@ const EditPolicyModal = ({ policy, isOpen, onClose, onSubmit }) => {
             <input {...register("eligibility_age")} className="input input-bordered w-full" />
           </div>
 
-          <div>
-            <label className="label">Term Length (Years)</label>
-            <input type="number" {...register("term_length_years")} className="input input-bordered w-full" />
-          </div>
+        
 
-          <div className="md:col-span-2">
-            <label className="label">Short Description</label>
-            <textarea {...register("short_description")} className="textarea textarea-bordered w-full" />
-          </div>
-
-          <div className="md:col-span-2">
-            <label className="label">Full Description</label>
-            <textarea {...register("full_description")} className="textarea textarea-bordered w-full" />
-          </div>
+         
 
           <div className="md:col-span-2">
             <label className="label">Benefits (Comma separated)</label>

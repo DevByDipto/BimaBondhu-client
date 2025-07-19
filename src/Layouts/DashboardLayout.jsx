@@ -78,11 +78,13 @@ const DashboardLayout = () => {
             </NavLink>
           </li>
           {/* rider role nav items */}
-          {role == "agent" && (
+          {/* {role == "agent" && ( */}
             <>
-            
+            <NavLink to="manage-applications">
+              <FaRegUser className="mr-2" /> Manage Applications
+            </NavLink>
             </>
-          )}
+          {/* )} */}
           {/* admin role nav items */}
           {role == "admin" && (
             <>

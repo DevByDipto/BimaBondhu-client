@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import PopularPolicies from "./PopularPolicies";
 
 const slides = [
   {
@@ -28,7 +29,8 @@ const slides = [
 
 const HeroSlider = () => {
   return (
-    <div className="w-full h-[80vh] bg-green-200">
+   <section>
+     <div className="w-full h-[80vh] bg-green-200">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 5000 }}
@@ -59,6 +61,10 @@ const HeroSlider = () => {
         ))}
       </Swiper>
     </div>
+{/* popularPolicies */}
+<PopularPolicies></PopularPolicies>
+
+   </section>
   );
 };
 

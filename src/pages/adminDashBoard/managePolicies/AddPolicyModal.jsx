@@ -7,7 +7,18 @@ const AddPolicyModal = ({ isOpen, onClose, onSubmit }) => {
   const [PhotofileUrl, setPhotofileUrl] = useState();
 
   const handleFormSubmit = (data) => {
-    onSubmit({ ...data, image: PhotofileUrl });
+    const benefitsArray = data.benefits.split(",").map(item => item.trim());
+    // console.log(benefitsArray);
+    
+    const someFormData= {
+      benefits:benefitsArray,
+      coverage_amount: Number(data.coverage_amount),
+      premium_per_month: Number(data.premium_per_month),
+      term_length_years: Number(data.term_length_years),
+      image: PhotofileUrl,
+      purchased: Number(0),
+    }
+    onSubmit({ ...data, ...someFormData });
     reset();
     onClose();
   };
@@ -60,18 +71,18 @@ const AddPolicyModal = ({ isOpen, onClose, onSubmit }) => {
               </div>
 
               <div className="md:col-span-2">
-                <label className="label">Short Description</label>
+                <label className="label">Full Description</label>
                 <textarea
-                  {...register("short_description")}
+                  {...register("full_description")}
                   className="textarea textarea-bordered w-full"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="label">Full Description</label>
+                <label className="label"> Short Description</label>
                 <textarea
-                  {...register("full_description")}
+                  {...register("short_description")}
                   className="textarea textarea-bordered w-full"
                   required
                 />
@@ -86,12 +97,23 @@ const AddPolicyModal = ({ isOpen, onClose, onSubmit }) => {
                   required
                 />
               </div>
+              
 
               <div>
                 <label className="label">Premium/Month</label>
                 <input
                   type="number"
                   {...register("premium_per_month")}
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="label">Term Length (years)</label>
+                <input
+                  type="number"
+                  {...register("term_length_years")}
                   className="input input-bordered w-full"
                   required
                 />
@@ -108,21 +130,13 @@ const AddPolicyModal = ({ isOpen, onClose, onSubmit }) => {
                 />
               </div>
 
-              <div>
-                <label className="label">Term Length (years)</label>
-                <input
-                  type="number"
-                  {...register("term_length_years")}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
+              
 
               <div className="md:col-span-2">
                 {/* <label className="label">Policy Image URL</label>
                 <input type="text" {...register("image")} className="input input-bordered w-full" /> */}
                 {/* image file */}
-                <label className="label block">Photo File</label>
+                <label className="label block">Policy Image</label>
                 <input
                   onChange={handleFileImageSubmite}
                   type="file"

@@ -13,6 +13,9 @@ import ForbiddenPage from "../components/ForbiddenPage";
 import AllPolicies from "../pages/AllPolicies/AllPolicies";
 import PoliciesDetails from "../pages/AllPolicies/PoliciesDetails";
 import ManagePolicies from "../pages/adminDashBoard/managePolicies/ManagePolicies";
+import QuotePage from "../pages/quotePage/QuotePage";
+import ApplicationForm from "../pages/applicationForm/ApplicationForm";
+import ManageApplications from "../pages/adminDashBoard/managePolicies/manageApplications/ManageApplications";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,14 @@ export const router = createBrowserRouter([
     {
       path:'/policies-details/:id',
       element:<PoliciesDetails></PoliciesDetails>
+    },
+    {
+      path:'/application-form/:policyId',
+      element:<ApplicationForm></ApplicationForm>
+    },
+    {
+      path:'/get-quote/:id',
+      element:<PrivateRoute><QuotePage></QuotePage></PrivateRoute>
     },
     {
       path:'/forbiden',
@@ -53,6 +64,11 @@ export const router = createBrowserRouter([
 {
   path:'manage-policies',
   element:<ManagePolicies></ManagePolicies>
+
+},
+{
+  path:'manage-applications',
+  element:<ManageApplications></ManageApplications>
 
 }
     ]

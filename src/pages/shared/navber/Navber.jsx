@@ -50,16 +50,9 @@ const Navbar = () => {
         Blog
       </NavLink>
      
-      {user && (
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"
-          }
-        >
-          Dashboard
-        </NavLink>
-      )}
+      {/* {user && (
+       
+      )} */}
     </>
   );
 
