@@ -93,6 +93,11 @@ const DashboardLayout = () => {
               <FaRegUser className="mr-2" /> Assigned Customers
             </NavLink>
           </li>
+          <li>
+            <NavLink to="Payment-Status">
+              <FaRegUser className="mr-2" /> Payment Status
+            </NavLink>
+          </li>
 
           {/* rider role nav items */}
           {/* {role == "agent" && ( */}

@@ -24,6 +24,8 @@ import ManageBlogs from "../pages/shared/manageblogs/ManageBlogs";
 import ManageUsers from "../pages/adminDashBoard/manageUsers/ManageUsers";
 import AssignedCustomers from "../pages/customerDashboard/assignedCustomers/AssignedCustomers";
 import ProfilePage from "../pages/shared/profilePage/ProfilePage";
+import PaymentStatus from "../pages/customerDashboard/paymentStatus/PaymentStatus";
+import MakePayment from "../pages/customerDashboard/paymentStatus/MakePayment";
 
 export const router = createBrowserRouter([
   {
@@ -111,6 +113,15 @@ export const router = createBrowserRouter([
   path:'profile-page',
   element:<ProfilePage></ProfilePage>
 },
+{
+  path:'payment-status',
+  element:<PaymentStatus></PaymentStatus>
+},
+{
+  path:'make-payment',
+  element:<MakePayment ></MakePayment >
+},
+
     ]
   }
 ]);

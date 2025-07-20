@@ -1,43 +1,69 @@
 import { useQuery } from '@tanstack/react-query';
-import axiosSecure from '../../api/axiosSecure'; // adjust path as needed
-import { Button } from "@/components/ui/button";
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useNavigate } from 'react-router';
 
 const PaymentStatus = () => {
-  const { data: application, isLoading } = useQuery({
+  const axiosSecure = useAxiosSecure();
+ const navigate = useNavigate()
+  const { data: applications = [], isLoading } = useQuery({
     queryKey: ['application-details'],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/application-details`);
-      return res.data;
+      const res = await axiosSecure.get('/application-details');
+      return res.data; // এটা এখন array হবে
     }
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!application) return <p>No application found</p>;
+  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (!applications.length) return <p className="text-center">No application found</p>;
 
-  const { payment_status, policyDetails } = application;
+  // ✅ filter only approved applications
+  const approvedApplications = applications.filter(app => app.application_status === 'approved');
 
   return (
-    <div className="bg-white shadow p-4 rounded-xl w-full max-w-md mx-auto space-y-4">
-      <h2 className="text-xl font-semibold text-center">Payment Status</h2>
-
-      <div className="space-y-2">
-        <p><span className="font-medium">Premium Per Month:</span> ${policyDetails?.premium_per_month}</p>
-        <p><span className="font-medium">Payment Frequency:</span> Monthly</p>
-        <p><span className="font-medium">Status:</span> 
-          <span className={`ml-2 font-bold ${payment_status === "due" ? "text-red-500" : "text-green-600"}`}>
-            {payment_status?.toUpperCase()}
-          </span>
-        </p>
-      </div>
-
-      <div className="text-center">
-        <Button
-          disabled={payment_status === "paid"}
-          className="w-full"
-        >
-          {payment_status === "paid" ? "Already Paid" : "Pay Now"}
-        </Button>
-      </div>
+    <div className="overflow-x-auto w-full">
+        <h2 className='text-center mt-10 text-3xl font-bold'>Payment Status</h2>
+      <table className="table w-full border border-gray-300 mt-5">
+        <thead className="">
+          <tr>
+            <th>#</th>
+            <th>Policy Title</th>
+            <th>Premium / Month</th>
+            <th>Payment Frequency</th>
+            <th>Payment Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {approvedApplications.map((app, index) => (
+            <tr key={app._id} className="border-t">
+              <td>{index + 1}</td>
+              <td>{app.policyDetails?.title || 'N/A'}</td>
+              <td>${app.policyDetails?.premium_per_month}</td>
+              <td>Monthly</td>
+              <td>
+                <span
+                  className={`font-bold ${
+                    app.payment_status === 'due' ? 'text-red-500' : 'text-green-600'
+                  }`}
+                >
+                  {app.payment_status?.toUpperCase()}
+                </span>
+              </td>
+              <td>
+                <button
+                  disabled={app.payment_status === 'paid'}
+                  className={`px-4 py-1 rounded ${
+                    app.payment_status === 'paid' ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 text-white'
+                  }`}
+                  onClick={()=>navigate('/dashboard/make-payment')}
+                >
+                  {app.payment_status === 'paid' ? 'Already Paid' : 'Pay Now'}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

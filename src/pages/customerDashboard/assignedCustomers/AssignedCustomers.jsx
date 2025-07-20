@@ -77,7 +77,7 @@ const AssignedCustomers = () => {
         <table className="table w-full border">
           <thead className="">
             <tr>
-              <th>#</th>
+              {/* <th>#</th> */}
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>
@@ -91,7 +91,7 @@ const AssignedCustomers = () => {
             
                 
                 <tr key={app._id} className="border-b">
-                  <td>{index + 1}</td>
+                  {/* <td>{index + 1}</td> */}
                   <td>{app.name || "N/A"}</td>
                   <td>{app.email}</td>
                   <td>

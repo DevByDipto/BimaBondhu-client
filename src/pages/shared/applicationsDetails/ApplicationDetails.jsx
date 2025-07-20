@@ -15,7 +15,7 @@ const ApplicationDetails = () => {
     queryKey: ["application", applicationId],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/application-details/${applicationId}`
+        `/application-details?id=${applicationId}`
       );
       return res.data;
     },
