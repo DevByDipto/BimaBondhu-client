@@ -137,14 +137,14 @@ const ManageApplications = () => {
               <td>
                 <span
                   className={`px-2 py-1 rounded text-sm font-medium ${
-                    app.status === "Pending"
+                    app.agent_status === "Pending"
                       ? "bg-yellow-100 text-yellow-800"
-                      : app.status === "Approved"
+                      : app.agent_status === "Approved"
                       ? "bg-green-100 text-green-800"
                       : "bg-red-100 text-red-800"
                   }`}
                 >
-                  {app.status}
+                  {app.agent_status}
                 </span>
               </td>
               <td>
@@ -159,7 +159,7 @@ const ManageApplications = () => {
                 <button
                   className="btn btn-sm btn-outline btn-warning"
                   onClick={() => openAssignModal(app)}
-                  disabled={app.status !== "Pending"} // ✅ Optional
+                  disabled={app.agent_status !== "pending"} // ✅ Optional
                 >
                   Assign Agent
                 </button>
@@ -168,7 +168,7 @@ const ManageApplications = () => {
                 <button
                   className="btn btn-sm btn-outline btn-error"
                   onClick={() => handleReject(app._id)}
-                  disabled={app.status !== "Pending"} // ✅ Optional
+                  disabled={app.agent_status !== "pending"} // ✅ Optional
                 >
                   Reject
                 </button>

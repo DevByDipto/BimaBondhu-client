@@ -5,6 +5,10 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import PopularPolicies from "./PopularPolicies";
+import LatestBlog from "./LatestBlog";
+import Reviews from "./Reviews";
+import NewsletterSubscription from "./NewsletterSubscription";
+import MeetOurAgents from "./MeetOurAgents";
 
 const slides = [
   {
@@ -63,6 +67,14 @@ const HeroSlider = () => {
     </div>
 {/* popularPolicies */}
 <PopularPolicies></PopularPolicies>
+{/* LatestBlog */}
+<LatestBlog></LatestBlog>
+{/* Reviews */}
+<Reviews></Reviews>
+{/* NewsletterSubscription */}
+<NewsletterSubscription></NewsletterSubscription>
+{/* MeetOurAgents */}
+<MeetOurAgents></MeetOurAgents>
 
    </section>
   );

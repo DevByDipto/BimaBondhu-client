@@ -73,7 +73,7 @@ const DashboardLayout = () => {
           </li>
           
           <li>
-            <NavLink to="/dashboard/profile">
+            <NavLink to="profile-page">
               <FaRegUser className="mr-2" /> Profile
             </NavLink>
           </li>
@@ -82,21 +82,46 @@ const DashboardLayout = () => {
               <FaRegUser className="mr-2" /> My Policies
             </NavLink>
           </li>
+          <li>
+            <NavLink to="manage-user">
+              <FaRegUser className="mr-2" /> Manage User
+            </NavLink>
+
+          </li>
+          <li>
+            <NavLink to="assigned-cuntomer">
+              <FaRegUser className="mr-2" /> Assigned Customers
+            </NavLink>
+          </li>
 
           {/* rider role nav items */}
           {/* {role == "agent" && ( */}
             <>
-            <NavLink to="manage-applications">
-              <FaRegUser className="mr-2" /> Manage Applications
+           <li>
+            
+            <NavLink to="manage-blogs">
+              <FaRegUser className="mr-2" /> Manage Blogs
             </NavLink>
+          </li>
             </>
           {/* )} */}
           {/* admin role nav items */}
-          {role == "admin" && (
+          {/* {role == "admin" && ( */}
             <>
-             
+            <li>
+            
+             <NavLink to="manage-applications">
+              <FaRegUser className="mr-2" /> Manage Applications
+            </NavLink>
+          </li>
+          <li>
+            
+              <NavLink to="manage-blogs">
+              <FaRegUser className="mr-2" /> Manage Blogs
+            </NavLink>
+          </li>
             </>
-          )}
+          {/* )} */}
         </ul>
       </div>
     </div>

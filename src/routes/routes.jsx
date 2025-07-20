@@ -18,6 +18,12 @@ import ApplicationForm from "../pages/applicationForm/ApplicationForm";
 import ApplicationDetails from "../pages/shared/applicationsDetails/ApplicationDetails";
 import ManageApplications from "../pages/adminDashBoard/manageApplications/ManageApplications";
 import MyPolicies from "../pages/customerDashboard/myPolicies/MyPolicies";
+import Blogs from "../pages/blogs/Blogs";
+import BlogDetails from "../pages/blogs/blogDetails/blogDetails";
+import ManageBlogs from "../pages/shared/manageblogs/ManageBlogs";
+import ManageUsers from "../pages/adminDashBoard/manageUsers/ManageUsers";
+import AssignedCustomers from "../pages/customerDashboard/assignedCustomers/AssignedCustomers";
+import ProfilePage from "../pages/shared/profilePage/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +36,14 @@ export const router = createBrowserRouter([
     {
       path:'/allpolicies',
       element:<AllPolicies></AllPolicies>
+    },
+    {
+      path:'/blogs',
+      element:<Blogs></Blogs>
+    },
+    {
+      path:'/blogDetails/:blogId',
+      element:<BlogDetails></BlogDetails>
     },
     {
       path:'/policies-details/:id',
@@ -80,7 +94,23 @@ export const router = createBrowserRouter([
 {
   path:'my-policies',
   element:<MyPolicies></MyPolicies>
-}
+},
+{
+  path:'manage-blogs',
+  element:<ManageBlogs></ManageBlogs>
+},
+{
+  path:'manage-user',
+  element:<ManageUsers></ManageUsers>
+},
+{
+  path:'assigned-cuntomer',
+  element:<AssignedCustomers></AssignedCustomers>
+},
+{
+  path:'profile-page',
+  element:<ProfilePage></ProfilePage>
+},
     ]
   }
 ]);

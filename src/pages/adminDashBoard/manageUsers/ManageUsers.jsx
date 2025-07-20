@@ -1,0 +1,147 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import useAxios from '../../../hooks/useAxios';
+import { useState } from 'react';
+
+const ManageUsers = () => {
+  const queryClient = useQueryClient();
+  const axiosInstance = useAxios();
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
+  // Load all users
+  const { data: users = [], isLoading } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await axiosInstance.get('/users');
+      return res.data;
+    }
+  });
+
+  // Delete user mutation
+  const deleteUserMutation = useMutation({
+    mutationFn: async (id) => {
+      return await axiosInstance.delete(`/users/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['users']);
+      Swal.fire('✅ Deleted!', 'User has been removed.', 'success');
+    },
+    onError: () => {
+      Swal.fire('❌ Error', 'Something went wrong!', 'error');
+    }
+  });
+
+  // Update Role Mutation
+  const updateRoleMutation = useMutation({
+    mutationFn: async ({ id, role }) => {
+      return await axiosInstance.patch(`/users/${id}`, { role });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['users']);
+      Swal.fire('✅ Role Changed', 'User role updated successfully', 'success');
+    },
+    onError: () => {
+      Swal.fire('❌ Error', 'Failed to update role', 'error');
+    }
+  });
+
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: `Are you sure to delete ${user.name}?`,
+      text: "This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUserMutation.mutate(user._id);
+      }
+    });
+  };
+
+  const handleRoleChange = (userId, newRole) => {
+    updateRoleMutation.mutate({ id: userId, role: newRole });
+    setOpenDropdownId(null);
+  };
+
+  if (isLoading) return <p className="text-center">Loading users...</p>;
+
+  return (
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
+      <div className="overflow-x-auto">
+        <table className="table w-full border">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Registered</th>
+              <th>Change Role</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, idx) => (
+              <tr key={user._id}>
+                <td>{idx + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                <td>
+                  <div className="relative inline-block text-left">
+                    <button
+                      onClick={() =>
+                        setOpenDropdownId(openDropdownId === user._id ? null : user._id)
+                      }
+                      className="btn btn-sm btn-primary"
+                    >
+                      Change Role
+                    </button>
+                    {openDropdownId === user._id && (
+                      <div className="absolute z-10 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div className="py-1 text-sm text-gray-700">
+                          <button
+                            onClick={() => handleRoleChange(user._id, 'customer')}
+                            className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                          >
+                            Customer
+                          </button>
+                          <button
+                            onClick={() => handleRoleChange(user._id, 'agent')}
+                            className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                          >
+                            Agent
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(user)}
+                    className="btn btn-sm btn-error text-white"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {users.length === 0 && (
+              <tr>
+                <td colSpan="7" className="text-center py-4 text-gray-500">
+                  No users found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default ManageUsers;

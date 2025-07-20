@@ -49,7 +49,8 @@ const ApplicationForm = () => {
       ...formData,
       policyId,
       email: user?.email || "",
-      status: "Pending",
+      application_status: "pending",
+      agent_status:"pending"
     };
 
     console.log(applicationData);

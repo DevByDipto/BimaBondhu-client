@@ -20,10 +20,12 @@ createUser(data.email,data.password)
   // console.log('from create user')
 // update user in database
 const lastLoginTime = result.user.metadata.lastSignInTime
+// console.log(data);
 
 const userInfo={
   email: data.email,
-  role:'customer' ,// default role
+  role:'customer',// default role
+  name:data.name,
   created_at: new Date(),
   last_log_in: new Date(lastLoginTime)
 }
