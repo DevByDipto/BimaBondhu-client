@@ -15,14 +15,15 @@ const PaymentStatus = () => {
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (!applications.length) return <p className="text-center">No application found</p>;
+console.log(applications);
 
   // ✅ filter only approved applications
   const approvedApplications = applications.filter(app => app.application_status === 'approved');
 
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="overflow-x-auto  m-5">
         <h2 className='text-center mt-10 text-3xl font-bold'>Payment Status</h2>
-      <table className="table w-full border border-gray-300 mt-5">
+      <table className="table  border border-gray-300 mt-5">
         <thead className="">
           <tr>
             <th>#</th>
@@ -53,9 +54,9 @@ const PaymentStatus = () => {
                 <button
                   disabled={app.payment_status === 'paid'}
                   className={`px-4 py-1 rounded ${
-                    app.payment_status === 'paid' ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 text-white'
+                    app.payment_status === 'paid' ? 'bg-gray-300 text-black cursor-not-allowed' : 'bg-green-500 text-white'
                   }`}
-                  onClick={()=>navigate('/dashboard/make-payment')}
+                  onClick={()=>navigate(`/dashboard/payment/${app.policyDetails._id}`)}
                 >
                   {app.payment_status === 'paid' ? 'Already Paid' : 'Pay Now'}
                 </button>
