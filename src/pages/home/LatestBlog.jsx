@@ -31,7 +31,7 @@ const LatestBlog = () => {
   };
 
   return (
-    <section className="my-10 max-w-6xl mx-auto px-4">
+    <section className="my-10 max-w-6xl mx-auto px-4 mt-20 md:mt-32">
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Latest Blogs & Articles</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
