@@ -4,6 +4,7 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import HelmetTitle from "../../components/HelmetTitle";
 
 const AllPolicies = () => {
   const axiosInstance = useAxios();
@@ -84,6 +85,9 @@ const handleSelect = async(e)=>{
   };
   
   return (
+
+    <section>
+      <HelmetTitle>All Policies</HelmetTitle>
     <div className="px-4 py-8 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-8">
         All Insurance Policies
@@ -170,6 +174,7 @@ const handleSelect = async(e)=>{
         </button>
       </div>
     </div>
+    </section>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
+import HelmetTitle from '../../components/HelmetTitle';
 
 const PoliciesDetails = () => {
   const { id } = useParams(); // 👉 URL থেকে ID নেওয়া হচ্ছে
@@ -25,6 +26,8 @@ const navigation = useNavigate()
   const totalPaid = premiumPerMonth * 12 * termInYears;
 
   return (
+    <section>
+       <HelmetTitle>Policies Details</HelmetTitle>
     <div className="max-w-2xl mx-auto border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition p-6 bg-white space-y-4">
       {/* Title and Category */}
       <div className="flex flex-col md:flex-row md:items-center justify-between">
@@ -102,6 +105,7 @@ const navigation = useNavigate()
         </button>
       </div>
     </div>
+    </section>
   );
 };
 
