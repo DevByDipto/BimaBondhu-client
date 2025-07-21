@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
@@ -16,7 +16,7 @@ const Navbar = () => {
      logoutUser().then(()=>localStorage.removeItem("token"))
      console.log(localStorage.getItem("2nd",'token'));
      
-    // navigate("/");
+    navigate("/");
   };
 
   const navItems = (
@@ -64,9 +64,9 @@ const Navbar = () => {
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <NavLink to="/" className="text-2xl font-bold text-blue-600">
+        <Link to="/" className="text-2xl font-bold text-blue-600">
           Bima<span className="text-gray-800">Bondhu</span>
-        </NavLink>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 text-gray-700 text-lg">
@@ -115,12 +115,12 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <NavLink
+            <Link
               to="/login"
               className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
               Login
-            </NavLink>
+            </Link>
           )}
         </div>
       )}
