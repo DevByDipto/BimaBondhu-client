@@ -37,7 +37,7 @@ const NewsletterSubscription = () => {
 
 
   return (
-    <div className="max-w-xl mx-auto p-6  shadow-lg rounded-xl mt-10">
+    <div className="max-w-xl mx-auto p-6  shadow-lg rounded-xl mt-20 md:mt-32">
       <h2 className="text-2xl font-semibold mb-4 text-center">📬 Subscribe to our Newsletter</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
