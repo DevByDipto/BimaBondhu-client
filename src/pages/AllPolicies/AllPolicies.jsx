@@ -113,21 +113,23 @@ const handleSelect = async(e)=>{
             {policiesData?.data?.map((policy) => (
               <div
                 key={policy._id}
-                className="rounded-2xl shadow-md hover:shadow-xl transition p-4 border border-gray-200"
+                className="rounded-2xl shadow-md hover:shadow-xl transition border border-gray-200"
                 onClick={()=>handleClick(policy._id)}
               >
                 {policy?.image && (
+                  <div className="p-4 ">
   <img
     src={policy.image}
     alt={policy?.title}
     className="w-full h-48 object-cover rounded-lg"
   />
+  </div>
 )}
-                <div className="mt-4">
+                <div className="mt-4 bg-blue-500 p-4 ">
                   <h3 className="text-xl font-semibold text-gray-800">
                     {policy.title}
                   </h3>
-                  <p className="text-sm text-blue-600 font-medium mt-1">
+                  <p className="text-sm text-white font-medium mt-1">
                     {policy.category}
                   </p>
                   <p className="mt-2 text-gray-600 text-sm">
