@@ -103,6 +103,11 @@ const DashboardLayout = () => {
               <FaRegUser className="mr-2" /> Claim Request
             </NavLink>
           </li>
+          <li>
+            <NavLink to="rejected-applications">
+              <FaRegUser className="mr-2" /> Rejected Applications
+            </NavLink>
+          </li>
 
           {/* rider role nav items */}
           {/* {role == "agent" && ( */}
@@ -134,6 +139,13 @@ const DashboardLayout = () => {
             
               <NavLink to="manage-blogs">
               <FaRegUser className="mr-2" /> Manage Blogs
+            </NavLink>
+          </li>
+           
+          <li>
+            
+              <NavLink to="manage-transactions">
+              <FaRegUser className="mr-2" /> Manage Transactions
             </NavLink>
           </li>
             </>

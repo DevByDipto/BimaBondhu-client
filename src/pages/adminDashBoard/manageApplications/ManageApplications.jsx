@@ -1,18 +1,21 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+// ✅ Extra imports
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const ManageApplications = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const modalRef = useRef();
+  const rejectModalRef = useRef(); // 🆕 reject reason modal
   const [selectedApplication, setSelectedApplication] = useState(null);
+  const [rejectReason, setRejectReason] = useState(""); // 🆕 reason state
   const queryClient = useQueryClient();
 
-  // 🔶 Applications Load
+  // ✅ Load Applications
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ["applications"],
     queryFn: async () => {
@@ -21,7 +24,7 @@ const ManageApplications = () => {
     },
   });
 
-  // 🔷 Agents Load
+  // ✅ Load Agents
   const { data: agents = [] } = useQuery({
     queryKey: ["agents"],
     queryFn: async () => {
@@ -30,79 +33,60 @@ const ManageApplications = () => {
     },
   });
 
-  // 🔄 Assign Mutation
+  // ✅ Assign Mutation
   const assignMutation = useMutation({
     mutationFn: async ({ applicationId, agentId }) => {
       await axiosSecure.patch(`/assign-agent`, { applicationId, agentId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["applications"] });
-      queryClient.invalidateQueries({ queryKey: ["agents"] });
       modalRef.current.close();
       Swal.fire({
         icon: "success",
         title: "Agent assigned successfully!",
-        showConfirmButton: false,
         timer: 1500,
+        showConfirmButton: false,
         position: "top-end",
-      });
-    },
-    onError: () => {
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "Failed to assign the agent.",
       });
     },
   });
 
-  // 🔴 Reject Mutation
+  // ✅ Reject Mutation
   const rejectMutation = useMutation({
-    mutationFn: async (applicationId) => {
-      await axiosSecure.patch(`/applications/reject/${applicationId}`);
+    mutationFn: async ({ applicationId, reason }) => {
+      await axiosSecure.patch(`/applications/reject/${applicationId}`, { reason });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["applications"] });
+      rejectModalRef.current.close();
       Swal.fire({
         icon: "success",
         title: "Application rejected",
-        showConfirmButton: false,
         timer: 1500,
+        showConfirmButton: false,
         position: "top-end",
       });
     },
-    onError: () => {
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "Failed to reject the application.",
-      });
-    },
   });
-
-  const handleAssign = (agentId) => {
-    const applicationId = selectedApplication._id;
-    assignMutation.mutate({ agentId, applicationId });
-  };
-
-  const handleReject = (applicationId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You want to reject this application!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, Reject it!",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        rejectMutation.mutate(applicationId);
-      }
-    });
-  };
 
   const openAssignModal = (application) => {
     setSelectedApplication(application);
     modalRef.current.showModal();
+  };
+
+  const openRejectModal = (application) => {
+    setSelectedApplication(application);
+    setRejectReason("");
+    rejectModalRef.current.showModal();
+  };
+
+  const handleRejectSubmit = () => {
+    if (!rejectReason) return Swal.fire("Please provide a reason!");
+
+    rejectMutation.mutate({
+      applicationId: selectedApplication._id,
+      reason: rejectReason,
+    });
   };
 
   if (isLoading) return <p className="text-center py-10">লোড হচ্ছে...</p>;
@@ -122,13 +106,12 @@ const ManageApplications = () => {
             <th>Status</th>
             <th>View</th>
             <th>Assign</th>
-            <th>Reject</th> 
+            <th>Reject</th>
           </tr>
         </thead>
-
         <tbody>
           {applications.map((app, index) => (
-            <tr key={app._id} className="hover">
+            <tr key={app._id}>
               <td>{index + 1}</td>
               <td>{app.name}</td>
               <td>{app.email}</td>
@@ -149,7 +132,7 @@ const ManageApplications = () => {
               </td>
               <td>
                 <button
-                  className="btn btn-sm btn-outline btn-info flex items-center gap-1"
+                  className="btn btn-sm btn-outline btn-info"
                   onClick={() => navigate(`/application-details/${app._id}`)}
                 >
                   <FaEye /> View
@@ -159,7 +142,7 @@ const ManageApplications = () => {
                 <button
                   className="btn btn-sm btn-outline btn-warning"
                   onClick={() => openAssignModal(app)}
-                  disabled={app.agent_status !== "pending"} // ✅ Optional
+                  disabled={app.agent_status !== "pending"}
                 >
                   Assign Agent
                 </button>
@@ -167,8 +150,8 @@ const ManageApplications = () => {
               <td>
                 <button
                   className="btn btn-sm btn-outline btn-error"
-                  onClick={() => handleReject(app._id)}
-                  disabled={app.agent_status !== "pending"} // ✅ Optional
+                  onClick={() => openRejectModal(app)}
+                  disabled={app.agent_status !== "pending"}
                 >
                   Reject
                 </button>
@@ -178,18 +161,17 @@ const ManageApplications = () => {
         </tbody>
       </table>
 
-      {/* ✅ Assign Agent Modal */}
+      {/* ✅ Assign Modal */}
       <dialog ref={modalRef} className="modal">
         <div className="modal-box max-w-2xl">
-          <h3 className="text-lg font-semibold mb-2">
-            Assign Agent for {selectedApplication?.name}
+          <h3 className="font-bold text-lg mb-4">
+            Assign Agent to {selectedApplication?.name}
           </h3>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto">
             {agents.map((agent) => (
               <div
                 key={agent._id}
-                className="border rounded p-3 shadow bg-base-100 flex justify-between items-center"
+                className="border p-3 rounded shadow flex justify-between items-center"
               >
                 <div>
                   <h4 className="font-bold">{agent.name}</h4>
@@ -199,7 +181,7 @@ const ManageApplications = () => {
                   </p>
                 </div>
                 <button
-                  onClick={() => handleAssign(agent._id)}
+                  onClick={() => assignMutation.mutate({ applicationId: selectedApplication._id, agentId: agent._id })}
                   className="btn btn-sm btn-primary"
                 >
                   Assign
@@ -207,11 +189,34 @@ const ManageApplications = () => {
               </div>
             ))}
           </div>
-
           <div className="modal-action">
             <form method="dialog">
               <button className="btn">Close</button>
             </form>
+          </div>
+        </div>
+      </dialog>
+
+      {/* ✅ Reject Modal */}
+      <dialog ref={rejectModalRef} className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4">
+            Provide a reason for rejecting {selectedApplication?.name}'s application
+          </h3>
+          <textarea
+            className="textarea textarea-bordered w-full"
+            rows={4}
+            placeholder="Write rejection reason here..."
+            value={rejectReason}
+            onChange={(e) => setRejectReason(e.target.value)}
+          ></textarea>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn btn-neutral mr-2">Cancel</button>
+            </form>
+            <button onClick={handleRejectSubmit} className="btn btn-error">
+              Submit Reject
+            </button>
           </div>
         </div>
       </dialog>

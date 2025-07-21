@@ -28,6 +28,8 @@ import PaymentStatus from "../pages/customerDashboard/paymentStatus/PaymentStatu
 import Payment from "../pages/customerDashboard/payment/Payment";
 import ClaimRequest from "../pages/customerDashboard/claimRequest/ClaimRequest";
 import PolicyClearance from "../pages/agentDashboard/policyclearance/policyclearance";
+import ManageTransactions from "../pages/agentDashboard/manageTransactions/ManageTransactions";
+import RejectedApplications from "../pages/customerDashboard/rjectedApplications/RejectedApplications";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +132,14 @@ export const router = createBrowserRouter([
 {
   path:'policy-clearance',
   element:<PolicyClearance></PolicyClearance >
+},
+{
+  path:'manage-transactions',
+  element:<ManageTransactions></ManageTransactions >
+},
+{
+  path:'rejected-applications',
+  element:<RejectedApplications></RejectedApplications >
 },
 
     ]

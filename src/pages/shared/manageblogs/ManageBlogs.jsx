@@ -35,6 +35,7 @@ console.log(role);
       }
     },
   });
+console.log(blogs);
 
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
