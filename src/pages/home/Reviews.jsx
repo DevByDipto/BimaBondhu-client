@@ -18,7 +18,7 @@ const Reviews = () => {
   if (isLoading) return <p className="text-center">Loading reviews...</p>;
 
   return (
-    <section className="my-10 max-w-4xl mx-auto px-4">
+    <section className="my-10 max-w-4xl mx-auto px-4 mt-20 md:mt-32">
       <h2 className="text-3xl font-bold text-center mb-6">Customer Reviews</h2>
 
       <div className="carousel w-full space-x-4">
