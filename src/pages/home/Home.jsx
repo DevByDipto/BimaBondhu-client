@@ -10,25 +10,29 @@ import Reviews from "./Reviews";
 import NewsletterSubscription from "./NewsletterSubscription";
 import MeetOurAgents from "./MeetOurAgents";
 import HelmetTitle from "../../components/HelmetTitle";
+import { Link } from "react-router";
 
 const slides = [
+  
+
+
   {
     id: 1,
     title: "Secure Your Tomorrow Today",
     subtitle: "Protect what matters most with BimaBondhu",
-    image: "https://images.unsplash.com/photo-1605902711622-cfb43c44367b",
+    image: "https://i.ibb.co/jkT2GM3h/download-1.jpg",
   },
   {
     id: 2,
     title: "Your Family, Our Priority",
     subtitle: "Affordable life insurance plans for every stage of life",
-    image: "https://images.unsplash.com/photo-1508385082359-f38ae991e8f8",
+    image: "https://i.ibb.co/2080qRjy/download.jpg",
   },
   {
     id: 3,
     title: "Plan Smart, Live Free",
     subtitle: "Get expert guidance and custom policies",
-    image: "https://images.unsplash.com/photo-1618946894926-58e1d9edb62e",
+    image: "https://i.ibb.co/Fkp1DdWS/images.jpg",
   },
 ];
 
@@ -36,7 +40,7 @@ const HeroSlider = () => {
   return (
    <section>
      <title>home</title>
-     <div className="w-full h-[80vh] bg-green-200">
+     <div className="w-full h-[80vh] ">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 5000 }}
@@ -52,15 +56,15 @@ const HeroSlider = () => {
                 backgroundImage: `url(${slide.image})`,
               }}
             >
-              <div className="bg-black bg-opacity-60 p-6 rounded-md max-w-xl text-white space-y-4">
+              <div className=" bg-opacity-60 p-6 rounded-md max-w-xl text-white space-y-4">
                 <h1 className="text-3xl md:text-5xl font-bold">{slide.title}</h1>
                 <p className="text-lg md:text-xl">{slide.subtitle}</p>
-                <a
-                  href="/quote"
+                <Link
+                  to="/allpolicies"
                   className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-lg font-semibold"
                 >
                   Get a Free Quote
-                </a>
+                </Link>
               </div>
             </div>
           </SwiperSlide>
