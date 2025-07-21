@@ -29,6 +29,9 @@ const Blogs = () => {
 
 
   return (
+    <section>
+      <title>Blogs</title>
+  
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {blogs.map((blog) => (
         <div key={blog._id} className=" rounded-xl shadow-md overflow-hidden">
@@ -69,6 +72,7 @@ const Blogs = () => {
         </div>
       ))}
     </div>
+      </section>
   );
 };
 

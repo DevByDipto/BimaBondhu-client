@@ -30,6 +30,7 @@ const useAxiosSecure = () => {
       } else if (status == 401) {
         logoutUser()
           .then(() => {
+            localStorage.removeItem("token");
             navigate("/login");
           })
           .catch(() => {});

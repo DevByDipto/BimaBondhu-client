@@ -75,6 +75,7 @@ const ClaimRequest = () => {
 
   return (
     <div className="p-5">
+      <title>Claim Request</title>
       <h2 className="text-xl font-bold mb-4">Approved Policies for Claim</h2>
 
       <div className="overflow-x-auto">
@@ -93,10 +94,11 @@ const ClaimRequest = () => {
             {approvedPolicies.map((policy, index) => (
               <tr key={policy._id}>
                 <td>{index + 1}</td>
-                <td>{policy.policyDetails.title}</td>
-                <td>{policy.policyDetails.category}</td>
-                <td>${policy.policyDetails.premium_per_month}</td>
-
+                <td>{policy.policyDetails?.title}</td>
+                <td>{policy.policyDetails?.category}</td>
+                <td>${policy.policyDetails?.premium_per_month}</td>
+{console.log(index + 1,policy?.claim_status,{policy})
+}
                 {/* ✅ Claim Status Column */}
                 <td className="font-semibold">
                   {policy.claim_status ? (

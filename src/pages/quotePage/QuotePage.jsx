@@ -35,6 +35,9 @@ const {id} = useParams()
   };
 
   return (
+    <section>
+      <title>Quote</title>
+   
     <div className="max-w-md mx-auto p-6  rounded-lg shadow-lg mt-10">
       <h1 className="text-2xl font-bold mb-6 text-center">Get Your Life Insurance Quote</h1>
       
@@ -131,6 +134,7 @@ const {id} = useParams()
         </p>
       )}
     </div>
+     </section>
   );
 };
 

@@ -2,13 +2,18 @@ import React from "react";
 import { NavLink, Outlet } from "react-router";
 import {
   FaHome,
-  FaBoxOpen,
-  FaHistory,
-  FaMapMarkedAlt,
+  FaUser,
+  FaFileAlt,
+  FaUsers,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaMoneyCheckAlt,
+  FaBlog,
+  FaClipboardList,
+  FaWallet,
+  FaFileSignature,
+  FaTasks,
   FaUserCheck,
-  FaUserClock,
-  FaUserShield,
-  FaUserPlus,
 } from "react-icons/fa";
 import { MdPending } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6"; // Profile এর জন্য
@@ -60,97 +65,91 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
-          <li>
-            <NavLink to="/">
-              <FaHome className="mr-2" /> Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="manage-policies">
-              <FaHome className="mr-2" /> Manage Policies
-            </NavLink>
-          </li>
-          
-          <li>
-            <NavLink to="profile-page">
-              <FaRegUser className="mr-2" /> Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="my-policies">
-              <FaRegUser className="mr-2" /> My Policies
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="manage-user">
-              <FaRegUser className="mr-2" /> Manage User
-            </NavLink>
+       <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
+  {/* Customer/Agent/Admin shared */}
+  <>
+    <li>
+      <NavLink to="/">
+        <FaHome className="mr-2" /> Home
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="manage-policies">
+        <FaFileAlt className="mr-2" /> Manage Policies
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="profile-page">
+        <FaUser className="mr-2" /> Profile
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="my-policies">
+        <FaClipboardList className="mr-2" /> My Policies
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="manage-user">
+        <FaUsers className="mr-2" /> Manage User
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="assigned-cuntomer">
+  <FaUserCheck className="mr-2" /> Assigned Customers
+</NavLink>
+    </li>
+    <li>
+      <NavLink to="Payment-Status">
+        <FaMoneyCheckAlt className="mr-2" /> Payment Status
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="claim-request">
+  <FaFileSignature className="mr-2" /> Claim Request
+</NavLink>
+    </li>
+    <li>
+      <NavLink to="rejected-applications">
+        <FaTimesCircle className="mr-2" /> Rejected Applications
+      </NavLink>
+    </li>
+  </>
 
-          </li>
-          <li>
-            <NavLink to="assigned-cuntomer">
-              <FaRegUser className="mr-2" /> Assigned Customers
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="Payment-Status">
-              <FaRegUser className="mr-2" /> Payment Status
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="claim-request">
-              <FaRegUser className="mr-2" /> Claim Request
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="rejected-applications">
-              <FaRegUser className="mr-2" /> Rejected Applications
-            </NavLink>
-          </li>
+  {/* Agent */}
+  {/* {role === "agent" && ( */}
+    <>
+      <li>
+        <NavLink to="manage-blogs">
+          <FaBlog className="mr-2" /> Manage Blogs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="policy-clearance">
+          <FaCheckCircle className="mr-2" /> Policy Clearance
+        </NavLink>
+      </li>
+    </>
+  {/* )} */}
 
-          {/* rider role nav items */}
-          {/* {role == "agent" && ( */}
-            <>
-           <li>
-            
-            <NavLink to="manage-blogs">
-              <FaRegUser className="mr-2" /> Manage Blogs
-            </NavLink>
-          </li>
-           <li>
-            
-            <NavLink to="policy-clearance">
-              <FaRegUser className="mr-2" /> Policy  Clearance
-            </NavLink>
-          </li>
-            </>
-          {/* )} */}
-          {/* admin role nav items */}
-          {/* {role == "admin" && ( */}
-            <>
-            <li>
-            
-             <NavLink to="manage-applications">
-              <FaRegUser className="mr-2" /> Manage Applications
-            </NavLink>
-          </li>
-          <li>
-            
-              <NavLink to="manage-blogs">
-              <FaRegUser className="mr-2" /> Manage Blogs
-            </NavLink>
-          </li>
-           
-          <li>
-            
-              <NavLink to="manage-transactions">
-              <FaRegUser className="mr-2" /> Manage Transactions
-            </NavLink>
-          </li>
-            </>
-          {/* )} */}
-        </ul>
+  {/* Admin */}
+  <>
+    <li>
+     <NavLink to="manage-applications">
+  <FaTasks className="mr-2" /> Manage Applications
+</NavLink>
+    </li>
+    <li>
+      <NavLink to="manage-blogs">
+        <FaBlog className="mr-2" /> Manage Blogs
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="manage-transactions">
+        <FaWallet className="mr-2" /> Manage Transactions
+      </NavLink>
+    </li>
+  </>
+</ul>
       </div>
     </div>
   );

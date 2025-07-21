@@ -2,6 +2,9 @@ import { Link } from 'react-router';
 
 const ForbiddenPage = () => {
   return (
+    <section>
+      <title>Forbidden</title>
+   
     <div className="min-h-screen flex flex-col justify-center items-center bg-base-200 text-center px-4">
       <h1 className="text-6xl font-bold text-error">403</h1>
       <p className="text-xl mt-4 text-base-content">
@@ -11,6 +14,7 @@ const ForbiddenPage = () => {
         Go to Home
       </Link>
     </div>
+     </section>
   );
 };
 

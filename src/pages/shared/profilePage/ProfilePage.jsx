@@ -64,6 +64,7 @@ console.log(res);
 
   return (
     <div className="max-w-md mx-auto mt-10 border p-6 rounded-lg shadow-md">
+      <title>Profile Page</title>
       <h2 className="text-2xl font-semibold mb-4 text-center">My Profile</h2>
 
       <div className="flex justify-center mb-4">

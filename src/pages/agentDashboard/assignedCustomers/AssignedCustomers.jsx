@@ -88,6 +88,7 @@ console.log(applications);
 
   return (
     <div className="p-6">
+      <title>Assigned Customers</title>
       <h2 className="text-2xl font-bold mb-4">Assigned Customers</h2>
       <div className="overflow-x-auto">
         <table className="table w-full border">

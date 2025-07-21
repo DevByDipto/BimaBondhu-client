@@ -95,6 +95,7 @@ console.log(blogs);
 
   return (
     <div className="p-4">
+      <title>Manage Blogs</title>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Manage Blogs</h2>
          <button className="btn btn-primary" onClick={() => setIsAddOpen(true)}>Add New Blog</button>

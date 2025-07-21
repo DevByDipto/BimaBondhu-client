@@ -24,6 +24,8 @@ const PolicyClearance = () => {
 
   return (
     <div className="p-4">
+            <title>Policy Clearance</title>
+
       <h2 className="text-2xl font-semibold mb-4">Policy Clearance</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
@@ -33,7 +35,7 @@ const PolicyClearance = () => {
               <th>Policy Name</th>
               <th>Amount</th>
               <th>View</th>
-              <th>Approve</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -50,13 +52,7 @@ const PolicyClearance = () => {
                     View Details
                   </button>
                 </td>
-                <td>
-                  <button
-                                        className="btn btn-success btn-sm"
-                  >
-                    Approve
-                  </button>
-                </td>
+                
               </tr>
             ))}
           </tbody>
@@ -83,6 +79,11 @@ const PolicyClearance = () => {
               <p><strong>Policy ID:</strong> {selectedPolicy.policyId}</p>
             </div>
             <div className="modal-action">
+               <button
+                                        className="btn btn-success btn-sm"
+                  >
+                    Approve
+                  </button>
               <button className="btn btn-sm" onClick={() => setSelectedPolicy(null)}>
                 Close
               </button>

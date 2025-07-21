@@ -42,6 +42,9 @@ console.log(application);
   } = application || {};
 
   return (
+    <section>
+
+   <title>Application Details</title>
     <div className="max-w-4xl mx-auto p-6  shadow-lg rounded-lg mt-6 space-y-6">
       <h2 className="text-2xl font-bold text-gray-800">Application Details</h2>
 
@@ -140,6 +143,7 @@ console.log(application);
         </div>
       )}
     </div>
+     </section>
   );
 };
 

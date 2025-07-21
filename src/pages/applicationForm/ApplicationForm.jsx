@@ -81,6 +81,9 @@ const ApplicationForm = () => {
   };
 
   return (
+    <section>
+
+   <title>Application Form</title>
     <div className="max-w-3xl mx-auto px-4 py-10">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Apply for Insurance
@@ -181,6 +184,7 @@ const ApplicationForm = () => {
         </button>
       </form>
     </div>
+     </section>
   );
 };
 

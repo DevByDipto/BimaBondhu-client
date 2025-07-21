@@ -87,7 +87,7 @@ const handleSelect = async(e)=>{
   return (
 
     <section>
-      <HelmetTitle>All Policies</HelmetTitle>
+      <title>All Policies</title>
     <div className="px-4 py-8 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-8">
         All Insurance Policies

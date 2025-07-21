@@ -22,6 +22,7 @@ console.log(applications);
 
   return (
     <div className="overflow-x-auto  m-5">
+      <title>Payment Status</title>
         <h2 className='text-center mt-10 text-3xl font-bold'>Payment Status</h2>
       <table className="table  border border-gray-300 mt-5">
         <thead className="">

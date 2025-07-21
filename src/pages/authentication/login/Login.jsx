@@ -38,6 +38,7 @@ const location = useLocation()
 
   return (
     <section className="flex items-center justify-center ">
+      <title>Login</title>
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-5xl font-bold">login account</h1>

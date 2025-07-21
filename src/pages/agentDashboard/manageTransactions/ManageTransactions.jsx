@@ -29,6 +29,8 @@ const ManageTransactions = () => {
 
   return (
     <div className="p-4">
+            <title>Manage Transactions</title>
+
       <h2 className="text-2xl font-semibold mb-4">Manage Transactions</h2>
 
       <div className="mb-4 text-xl font-medium">

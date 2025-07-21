@@ -37,7 +37,7 @@ const signinWithGoogle=()=>{
   }
 
   const logoutUser=()=>{
-     signOut(auth)
+    return signOut(auth)
   }
 
   useEffect(() => {

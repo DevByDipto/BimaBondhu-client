@@ -50,6 +50,7 @@ console.log(myPolicies);
 
   return (
     <div className="p-4 md:p-8">
+      <title>My Policies</title>
       <h2 className="text-2xl font-semibold mb-6">My Policies</h2>
 
       <div className="overflow-x-auto  rounded-xl shadow">

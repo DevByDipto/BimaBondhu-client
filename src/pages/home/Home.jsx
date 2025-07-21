@@ -35,8 +35,7 @@ const slides = [
 const HeroSlider = () => {
   return (
    <section>
-      {/* <HelmetTitle>home</HelmetTitle> */}
-      <HelmetTitle title="home | bimaBondhu" />
+     <title>home</title>
      <div className="w-full h-[80vh] bg-green-200">
       <Swiper
         modules={[Autoplay, Pagination]}

@@ -27,7 +27,7 @@ const navigation = useNavigate()
 
   return (
     <section>
-       <HelmetTitle>Policies Details</HelmetTitle>
+    <title>Policies Details</title>
     <div className="max-w-2xl mx-auto border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition p-6 bg-white space-y-4">
       {/* Title and Category */}
       <div className="flex flex-col md:flex-row md:items-center justify-between">

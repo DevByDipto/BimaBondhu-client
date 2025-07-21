@@ -10,8 +10,12 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLogout = async () => {
-    await logoutUser();
+  const handleLogout =  () => {
+         console.log(localStorage.getItem("1st",'token'));
+
+     logoutUser().then(()=>localStorage.removeItem("token"))
+     console.log(localStorage.getItem("2nd",'token'));
+     
     // navigate("/");
   };
 

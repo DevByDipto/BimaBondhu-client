@@ -93,6 +93,7 @@ const ManageApplications = () => {
 
   return (
     <div className="p-5 overflow-x-auto">
+      <title>Manage Applications</title>
       <h2 className="text-2xl font-semibold mb-4">Manage Applications</h2>
 
       <table className="table w-full border">

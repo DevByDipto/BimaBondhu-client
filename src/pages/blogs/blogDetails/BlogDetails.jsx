@@ -18,6 +18,9 @@ const BlogDetails = () => {
   if (isLoading) return <div className="text-center py-10">Loading...</div>;
 
   return (
+    <section>
+      <title>Blog Details</title>
+  
     <div className="max-w-4xl mx-auto p-6 space-y-4">
       <img
         src={blog.coverImage}
@@ -44,6 +47,7 @@ const BlogDetails = () => {
         Total Visits: <span className="font-semibold">{blog.totalVisit}</span>
       </div>
     </div>
+      </section>
   );
 };
 

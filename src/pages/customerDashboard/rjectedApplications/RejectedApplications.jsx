@@ -21,6 +21,8 @@ const RejectedApplications = () => {
 
   return (
     <div className="p-4">
+            <title>Rejected Applications</title>
+
       <h2 className="text-xl font-bold mb-4">❌ Rejected Applications</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full text-sm">
