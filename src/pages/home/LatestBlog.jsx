@@ -36,15 +36,15 @@ const LatestBlog = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         {latestBlogs.map((blog) => (
-          <div key={blog._id} className="card bg-base-100 shadow-xl border">
+          <div key={blog._id} className="card bg-base-100 rounded-xl shadow-xl  border-gray-100 border-x-2 border-t-2">
             <figure>
               <img src={blog.coverImage} alt={blog.title} className="w-full h-52 object-cover" />
             </figure>
-            <div className="card-body">
+            <div className="card-body bg-blue-500 rounded-xl">
               <h3 className="text-xl font-semibold">{blog.title}</h3>
               <p>{blog.excerpt}</p>
               <div className="card-actions justify-end mt-4">
-                <button to={`/blogDetails/${blog._id}`} className="btn btn-sm btn-outline" onClick={()=>handleReadMore(blog._id)}>
+                <button to={`/blogDetails/${blog._id}`} className="btn btn-sm btn-accent" onClick={()=>handleReadMore(blog._id)}>
                   Read More
                 </button>
               </div>

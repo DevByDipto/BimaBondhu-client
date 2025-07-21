@@ -20,12 +20,16 @@ const axiosInstance = useAxios()
       <h2 className="text-3xl font-bold text-center mb-8">Meet Our Agents</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {agents.map((agent) => (
-          <div key={agent._id} className=" shadow-md p-5 rounded-xl border">
-            <img
+          <div key={agent._id} className=" shadow-md  rounded-xl  border-gray-100 border-x-2 border-t-2">
+            <div className="">
+ <img
               src={agent.photo}
               alt={agent.name}
               className="w-full h-52 object-cover rounded-lg mb-4"
             />
+            </div>
+           
+            <div className="bg-blue-500 p-5 rounded-xl">
             <h3 className="text-xl font-semibold">{agent.name}</h3>
             <p className="text-gray-600 mb-2">
               <strong>Experience:</strong> {agent.experience} years
@@ -43,6 +47,7 @@ const axiosInstance = useAxios()
               <FaStar className="text-yellow-500" />
               <span className="font-medium">{agent.rating}</span>
             </div>
+</div>
           </div>
         ))}
       </div>
