@@ -22,10 +22,12 @@ import Blogs from "../pages/blogs/Blogs";
 import BlogDetails from "../pages/blogs/blogDetails/blogDetails";
 import ManageBlogs from "../pages/shared/manageblogs/ManageBlogs";
 import ManageUsers from "../pages/adminDashBoard/manageUsers/ManageUsers";
-import AssignedCustomers from "../pages/customerDashboard/assignedCustomers/AssignedCustomers";
+import AssignedCustomers from "../pages/agentDashboard/assignedCustomers/AssignedCustomers";
 import ProfilePage from "../pages/shared/profilePage/ProfilePage";
 import PaymentStatus from "../pages/customerDashboard/paymentStatus/PaymentStatus";
 import Payment from "../pages/customerDashboard/payment/Payment";
+import ClaimRequest from "../pages/customerDashboard/claimRequest/ClaimRequest";
+import PolicyClearance from "../pages/agentDashboard/policyclearance/policyclearance";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +122,14 @@ export const router = createBrowserRouter([
 {
   path:'payment/:policyId',
   element:<Payment></Payment >
+},
+{
+  path:'claim-request',
+  element:<ClaimRequest></ClaimRequest >
+},
+{
+  path:'policy-clearance',
+  element:<PolicyClearance></PolicyClearance >
 },
 
     ]
