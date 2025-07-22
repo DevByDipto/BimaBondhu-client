@@ -89,7 +89,7 @@ const ManageApplications = () => {
     });
   };
 
-  if (isLoading) return <p className="text-center py-10">লোড হচ্ছে...</p>;
+  if (isLoading) return <p className="text-center py-10">loading...</p>;
 
   return (
     <div className="p-5 overflow-x-auto">

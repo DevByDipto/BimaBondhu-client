@@ -3,9 +3,11 @@ import useAxios from "../../../hooks/useAxios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import DownloadPolicyButton from "./DownloadPolicyButton";
 
 const AssignedCustomers = () => {
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
@@ -21,11 +23,11 @@ const AssignedCustomers = () => {
   } = useQuery({
     queryKey: ["assigned-applications"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/applications");
+      const res = await axiosSecure.get("/applications");
       return res.data;
     },
   });
-console.log(applications);
+// console.log(applications);
 
   // 🔁 Status update mutation
   const mutation = useMutation({
@@ -37,7 +39,7 @@ console.log(applications);
         payload.reject_reason = reason; // 📤 কারণ পাঠানো হচ্ছে
       }
 
-      const res = await axiosInstance.patch(`/applications/status/${id}`, payload);
+      const res = await axiosSecure.patch(`/applications/status/${id}`, payload);
       return res.data;
     },
     onSuccess: () => {
@@ -85,6 +87,7 @@ console.log(applications);
 
   if (isLoading) return <p className="text-center py-10">Loading customers...</p>;
   if (isError) return <p className="text-center text-red-500">❌ Failed to load data</p>;
+console.log(applications);
 
   return (
     <div className="p-6">
@@ -105,8 +108,10 @@ console.log(applications);
             {applications.map((app) =>
               app.agent_status === "approved" ? (
                 <tr key={app._id} className="border-b">
-                  <td>{app.name || "N/A"}</td>
-                  <td>{app.email}</td>
+                  {console.log(app)
+                  }
+                  <td>{app?.name || "N/A"}</td>
+                  <td>{app?.email}</td>
                   <td>
                     <span
                       className={`px-2 py-1 rounded text-white ${
@@ -117,7 +122,7 @@ console.log(applications);
                           : "bg-red-600"
                       }`}
                     >
-                      {app.application_status}
+                      {app?.application_status}
                     </span>
                   </td>
                   <td>
@@ -132,7 +137,7 @@ console.log(applications);
                   </td>
                   <td className="flex items-center gap-2">
                     <select
-                      value={app.application_status}
+                      value={app?.application_status}
                       onChange={(e) =>
                         handleStatusChange(app._id, e.target.value)
                       }
@@ -143,6 +148,14 @@ console.log(applications);
                       <option value="rejected">Rejected</option>
                     </select>
                   </td>
+                  <td>
+  
+
+  {/* ✅ Show download only if approved */}
+  {app.application_status === "approved" && (
+    <DownloadPolicyButton application={app} />
+  )}
+</td>
                 </tr>
               ) : null
             )}

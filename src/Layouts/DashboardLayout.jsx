@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router";
+import React, { useState } from "react";
+import { Link, NavLink, Outlet } from "react-router";
 import {
   FaHome,
   FaUser,
@@ -14,6 +14,8 @@ import {
   FaFileSignature,
   FaTasks,
   FaUserCheck,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 import { MdPending } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6"; // Profile এর জন্য
@@ -21,6 +23,8 @@ import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
   const { role, roleLoder } = useUserRole();
+    const [isOpen, setIsOpen] = useState(false);
+  
   // console.log(role);
   
   if (roleLoder) {
@@ -34,7 +38,7 @@ const DashboardLayout = () => {
         <div className="navbar bg-base-300 w-full lg:hidden">
           <div className="flex-none">
             <label
-              htmlFor="my-drawer-3"
+              htmlFor="my-drawer-2"
               aria-label="open sidebar"
               className="btn btn-square btn-ghost"
             >
@@ -55,6 +59,7 @@ const DashboardLayout = () => {
           </div>
           <div className="mx-2 flex-1 px-2">Dashboard</div>
         </div>
+
         {/* Page content start*/}
         <Outlet></Outlet>
         {/* Page content end */}
@@ -67,17 +72,15 @@ const DashboardLayout = () => {
         ></label>
        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
   {/* Customer/Agent/Admin shared */}
-  <>
     <li>
       <NavLink to="/">
         <FaHome className="mr-2" /> Home
       </NavLink>
     </li>
-    <li>
-      <NavLink to="manage-policies">
-        <FaFileAlt className="mr-2" /> Manage Policies
-      </NavLink>
-    </li>
+    {/* customer */}
+   {role === "customer" && (
+  <>  
+   
     <li>
       <NavLink to="profile-page">
         <FaUser className="mr-2" /> Profile
@@ -88,16 +91,8 @@ const DashboardLayout = () => {
         <FaClipboardList className="mr-2" /> My Policies
       </NavLink>
     </li>
-    <li>
-      <NavLink to="manage-user">
-        <FaUsers className="mr-2" /> Manage User
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to="assigned-cuntomer">
-  <FaUserCheck className="mr-2" /> Assigned Customers
-</NavLink>
-    </li>
+   
+    
     <li>
       <NavLink to="Payment-Status">
         <FaMoneyCheckAlt className="mr-2" /> Payment Status
@@ -114,10 +109,15 @@ const DashboardLayout = () => {
       </NavLink>
     </li>
   </>
-
+)}
   {/* Agent */}
-  {/* {role === "agent" && ( */}
+  {role === "agent" && (
     <>
+    <li>
+      <NavLink to="assigned-cuntomer">
+  <FaUserCheck className="mr-2" /> Assigned Customers
+</NavLink>
+    </li>
       <li>
         <NavLink to="manage-blogs">
           <FaBlog className="mr-2" /> Manage Blogs
@@ -129,26 +129,39 @@ const DashboardLayout = () => {
         </NavLink>
       </li>
     </>
-  {/* )} */}
+   )} 
 
   {/* Admin */}
+   {role === "admin" && (
   <>
     <li>
      <NavLink to="manage-applications">
   <FaTasks className="mr-2" /> Manage Applications
 </NavLink>
     </li>
+ <li>
+      <NavLink to="manage-user">
+        <FaUsers className="mr-2" /> Manage User
+      </NavLink>
+    </li>
+ <li>
+      <NavLink to="manage-policies">
+        <FaFileAlt className="mr-2" /> Manage Policies
+      </NavLink>
+    </li>
+ <li>
+      <NavLink to="manage-transactions">
+        <FaWallet className="mr-2" /> Manage Transactions
+      </NavLink>
+    </li>
     <li>
       <NavLink to="manage-blogs">
         <FaBlog className="mr-2" /> Manage Blogs
       </NavLink>
     </li>
-    <li>
-      <NavLink to="manage-transactions">
-        <FaWallet className="mr-2" /> Manage Transactions
-      </NavLink>
-    </li>
+   
   </>
+  )}
 </ul>
       </div>
     </div>

@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaFire } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const PopularPolicies = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxios();
 const navigate = useNavigate()
   const { data: policies = [], isLoading } = useQuery({
     queryKey: ["popularPolicies"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/policies/popular");
+      const res = await axiosInstance.get("/policies/popular");
       return res.data.data;
     },
   });

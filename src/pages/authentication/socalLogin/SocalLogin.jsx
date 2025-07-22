@@ -2,6 +2,7 @@ import React from 'react'
 import useAuth from '../../../hooks/useAuth'
 import useAxios from '../../../hooks/useAxios'
 import { useLocation, useNavigate } from 'react-router'
+import toast from 'react-hot-toast'
 
 const SocalLogin = () => {
 const {signinWithGoogle} = useAuth()
@@ -11,7 +12,7 @@ const location = useLocation()
 
 const handleLoging=()=>{
 signinWithGoogle()
-.then(async(result)=>{console.log(result.user)
+.then(async(result)=>{
   const lastLoginTime = result.user.metadata.lastSignInTime
 
   const userInfo={
@@ -21,11 +22,11 @@ signinWithGoogle()
   last_log_in: new Date(lastLoginTime)
 }
 const userRes = await axiosInstance.post("/user",userInfo)
-console.log("userinfo",userRes.data);
+// console.log("userinfo",userRes.data);
 navigate(location.state || '/')
 
 })
-.catch((err)=>console.log(err)) 
+.catch((err)=>toast.error(err.message)) 
 }
 
 

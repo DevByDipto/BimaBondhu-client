@@ -17,7 +17,7 @@ const Blogs = () => {
   if (isLoading) return <p className="text-center">Loading...</p>;
 
     const handleReadMore = async (id) => {
-        console.log(id);
+        // console.log(id);
         
     try {
       await axiosInstance.patch(`/blogs/${id}/increment-visit`);
@@ -35,7 +35,10 @@ const Blogs = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {blogs.map((blog) => (
         <div key={blog._id} className=" rounded-xl shadow-md overflow-hidden">
+          <div className=''>
+
           <img src={blog.coverImage} alt={blog.title} className="w-full h-48 object-cover" />
+          </div>
 
           <div className="p-4">
             <h2 className="text-xl font-semibold">{blog.title}</h2>

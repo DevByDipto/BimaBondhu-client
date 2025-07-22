@@ -33,7 +33,6 @@ const AddPolicyModal = ({ isOpen, onClose, onSubmit }) => {
     }`;
 
     const res = await axios.post(imageUploadUrl, formData);
-    console.log(res.data.data.url);
     setPhotofileUrl(res.data.data.url);
     //   setProfilePic(res.data.data.url);
   };

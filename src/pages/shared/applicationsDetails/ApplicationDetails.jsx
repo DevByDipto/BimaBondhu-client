@@ -26,7 +26,7 @@ const ApplicationDetails = () => {
     return (
       <div className="text-red-500 text-center">Error: {error.message}</div>
     );
-console.log(application);
+// console.log(application);
 
   const {
     name,

@@ -11,10 +11,10 @@ const PaymentForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { policyId } = useParams();
-  console.log(policyId);
+  // console.log(policyId);
   
   const { user } = useAuth();
-  console.log(user.email);
+  // console.log(user.email);
   
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -29,7 +29,7 @@ const PaymentForm = () => {
   if (isPending) {
     return "....loding";
   }
-  console.log(policyInfo);
+  // console.log(policyInfo);
   
 
   const amount = policyInfo.premium_per_month;
@@ -54,10 +54,10 @@ const PaymentForm = () => {
 
     if (error) {
       setError(error.message);
-      console.log("[error]", error);
+      // console.log(error);
     } else {
       setError("");
-      console.log("[PaymentMethod]", paymentMethod); //client side e aita create korar por samne aitar ar kaj kii ?? kono kaj nah thakle toiri keno korsi ??
+      // console.log("[PaymentMethod]", paymentMethod); //client side e aita create korar por samne aitar ar kaj kii ?? kono kaj nah thakle toiri keno korsi ??
       // step-2 create payment instance
       const res = await axiosSecure.post("/create-payment-intent", {
         amountIncents,
@@ -82,8 +82,8 @@ const PaymentForm = () => {
       } else {
         setError("");
         if (result.paymentIntent.status === "succeeded") {
-          console.log("Payment successful!");
-          console.log(result);
+          // console.log("Payment successful!");
+          // console.log(result);
 
           // mark parcel payed also create a payment history
           const paymentInfo = {
@@ -97,10 +97,10 @@ const PaymentForm = () => {
           };
 
           const res = await axiosSecure.post("/savePaymentInfo", paymentInfo);
-          console.log(res.data);
+          // console.log(res.data);
           
           if (res.data.paymentInsert.insertedId) {
-            console.log("paymen success");
+            // console.log("paymen success");
             Swal.fire({
               icon: "success",
               title: "Payment Successful!",

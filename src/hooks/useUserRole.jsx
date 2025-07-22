@@ -17,6 +17,7 @@ const useUserRole = () => {
       return res.data?.role; // শুধু role string ফেরত দিচ্ছে
     },
   });
+console.log(role);
 
   return { role, roleLoder, refetch };
 };

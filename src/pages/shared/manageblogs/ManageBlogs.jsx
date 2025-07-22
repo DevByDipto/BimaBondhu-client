@@ -10,7 +10,7 @@ import AddNewBlogModal from './AddNewBlogModal';
 
 const ManageBlogs = () => {
   const { role, roleLoder: roleLoading } = useUserRole();
-console.log(role);
+// console.log(role);
 
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -35,7 +35,7 @@ console.log(role);
       }
     },
   });
-console.log(blogs);
+// console.log(blogs);
 
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,8 +71,11 @@ console.log(blogs);
   const handleUpdate = async (id, updatedData) => {
     
     try {
+      // console.log(id);
+      
       await axiosSecure.patch(`/blogs/${id}`, updatedData);
       Swal.fire("Updated!", "Blog has been updated.", "success");
+      setSelectedBlog(null)
       refetch();
     } catch (err) {
       Swal.fire("Failed!", "Blog update failed.", "error");
@@ -80,7 +83,7 @@ console.log(blogs);
   };
 
   const handleAdd = async (newBlog) => {
-    console.log(newBlog);
+    // console.log(newBlog);
     
     try {
       await axiosSecure.post('/blogs', newBlog);
@@ -151,6 +154,7 @@ console.log(blogs);
       {selectedBlog && (
         <EditBlogModal
           blog={selectedBlog}
+        
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onUpdate={handleUpdate}

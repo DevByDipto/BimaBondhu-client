@@ -36,7 +36,7 @@ const ManagePolicies = () => {
   // ✅ add mutation
   const addMutation = useMutation({
     mutationFn: async (newPolicy) => {
-        console.log({newPolicy});
+        // console.log({newPolicy});
         
     //   const formData = new FormData();
     //   Object.entries(newPolicy).forEach(([key, value]) => {
@@ -77,23 +77,24 @@ const ManagePolicies = () => {
     },
   });
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "তুমি কি নিশ্চিত?",
-      text: "এই policy টি মুছে ফেলতে চাও!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "হ্যাঁ, মুছে ফেলো!",
-      cancelButtonText: "বাতিল",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteMutation.mutate(id);
-        Swal.fire("মুছে ফেলা হয়েছে!", "Policy সফলভাবে মুছে ফেলা হয়েছে।", "success");
-      }
-    });
-  };
+ const handleDelete = (id) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Do you want to delete this policy?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteMutation.mutate(id);
+      Swal.fire("Deleted!", "The policy has been deleted successfully.", "success");
+    }
+  });
+};
+
 
   if (isLoading) return <div className="text-center my-10">Loading policies...</div>;
   if (isError) return <div className="text-center text-red-500">Failed to load policies</div>;

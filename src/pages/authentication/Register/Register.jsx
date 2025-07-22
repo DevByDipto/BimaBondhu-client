@@ -5,6 +5,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router'
 import SocalLogin from '../socalLogin/SocalLogin'
 import axios from 'axios'
 import useAxios from '../../../hooks/useAxios'
+import toast from 'react-hot-toast'
 const Register = () => {
 const {register,handleSubmit,formState:{errors}} = useForm()
 const { createUser,updateUserProfile} = useAuth()
@@ -31,18 +32,18 @@ const userInfo={
 }
 
 const userRes = await axiosInstance.post("/user",userInfo)
-console.log("userinfo",userRes.data);
+// console.log("userinfo",userRes.data);
 
 
   // update user is firebase
 updateUserProfile(data.name,profilePic)
 .then(()=>{
-  console.log('successfull')
+  // console.log('successfull')
 navigate(location.state || '/')
 })
-.catch(err=>console.log(err))
+.catch(err=>toast.error(err.message))
 })
-.catch((err)=>console.log(err.message))    
+.catch((err)=>toast.error(err.message))    
 }
 
 const handleFileImageSubmite =async(e)=>{
@@ -53,7 +54,7 @@ const handleFileImageSubmite =async(e)=>{
   const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_UPLOAD_KEY}`
 
   const res = await axios.post(imageUploadUrl, formData)
-  console.log(res.data.data.url);
+  // console.log(res.data.data.url);
   setProfilePic(res.data.data.url);
   
   

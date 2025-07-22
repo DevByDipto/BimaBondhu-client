@@ -16,7 +16,7 @@ const navigation = useNavigate()
     }
   });
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
-  console.log(policy);
+  // console.log(policy);
   
 
   // 💡 প্রিমিয়াম ক্যালকুলেশন লজিক (বর্ণনা সহ)
@@ -39,16 +39,16 @@ const navigation = useNavigate()
 
       {/* Image */}
       <img
-        src={policy.image}
-        alt={policy.title}
+        src={policy?.image}
+        alt={policy?.title}
         className="w-full h-64 object-cover rounded-lg"
       />
 
       {/* Short & Full Description */}
       <p className="text-gray-600 font-medium">
-        {policy.short_description}
+        {policy?.short_description}
       </p>
-      <p className="text-gray-700">{policy.full_description}</p>
+      <p className="text-gray-700">{policy?.full_description}</p>
 
       {/* Eligibility and Term */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-700">
@@ -62,7 +62,7 @@ const navigation = useNavigate()
         </div>
         <div>
           <span className="font-semibold">Eligible Age:</span><br />
-          {policy.eligibility_age}
+          {policy?.eligibility_age}
         </div>
         <div>
           <span className="font-semibold">Term:</span><br />
@@ -74,7 +74,7 @@ const navigation = useNavigate()
       <div>
         <h4 className="font-semibold text-gray-800 mt-4 mb-2">Benefits:</h4>
         <ul className="list-disc list-inside space-y-1 text-gray-600">
-          {policy.benefits?.map((benefit, index) => (
+          {policy?.benefits?.map((benefit, index) => (
             <li key={index}>{benefit}</li>
           ))}
         </ul>
@@ -98,7 +98,7 @@ const navigation = useNavigate()
       {/* CTA Button */}
       <div className="text-right pt-4">
         <button
-          onClick={() => navigation(`/get-quote/${policy._id}`) }
+          onClick={() => navigation(`/get-quote/${policy?._id}`) }
           className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition"
         >
           Get Quote

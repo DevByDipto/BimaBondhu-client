@@ -13,7 +13,7 @@ const EditBlogModal = ({ blog, isOpen, onClose, onUpdate }) => {
 
   const onSubmit = (data) => {
       const { _id, ...updateData } = data;
-      console.log(updateData);
+      // console.log(updateData);
     
     onUpdate(blog._id, updateData);
     reset();
@@ -57,7 +57,7 @@ const EditBlogModal = ({ blog, isOpen, onClose, onUpdate }) => {
             </div>
             <div>
               <label className="label">Email</label>
-              <input {...register('email')} className="input input-bordered w-full" />
+              <input {...register('email')} className="input input-bordered w-full" readOnly/>
             </div>
             <div>
               <label className="label">Total Visit</label>

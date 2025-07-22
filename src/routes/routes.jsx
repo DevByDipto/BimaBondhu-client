@@ -30,6 +30,10 @@ import ClaimRequest from "../pages/customerDashboard/claimRequest/ClaimRequest";
 import PolicyClearance from "../pages/agentDashboard/policyclearance/policyclearance";
 import ManageTransactions from "../pages/agentDashboard/manageTransactions/ManageTransactions";
 import RejectedApplications from "../pages/customerDashboard/rjectedApplications/RejectedApplications";
+import AdmineRoute from "../router/AdmineRoute";
+import AgentRoute from "../router/AgentRoute";
+import AdminAndAgentRoute from "../router/adminAndAgentRoute";
+import CustomerRoute from "../router/CustomerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -57,7 +61,7 @@ export const router = createBrowserRouter([
     },
     {
       path:'/application-form/:policyId',
-      element:<ApplicationForm></ApplicationForm>
+      element:<PrivateRoute><ApplicationForm></ApplicationForm></PrivateRoute>
     },
     {
       path:'/application-details/:applicationId',
@@ -83,63 +87,64 @@ export const router = createBrowserRouter([
     path:'/dashboard',
     element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children:[
-// {
-//   index:true,
-//   element:
-// },
 {
-  path:'manage-policies',
-  element:<ManagePolicies></ManagePolicies>
-
+  index:true,
+  element:<ProfilePage></ProfilePage>
 },
 {
   path:'manage-applications',
-  element:<ManageApplications></ManageApplications>
+  element:<AdmineRoute><ManageApplications></ManageApplications></AdmineRoute>
 
 },
 {
-  path:'my-policies',
-  element:<MyPolicies></MyPolicies>
-},
-{
-  path:'manage-blogs',
-  element:<ManageBlogs></ManageBlogs>
-},
-{
   path:'manage-user',
-  element:<ManageUsers></ManageUsers>
+  element:<AdmineRoute><ManageUsers></ManageUsers></AdmineRoute>
+},
+{
+  path:'manage-policies',
+  element:<AdmineRoute><ManagePolicies></ManagePolicies></AdmineRoute>
+
+},
+{
+  path:'manage-transactions',
+  element:<AdmineRoute><ManageTransactions></ManageTransactions></AdmineRoute>
 },
 {
   path:'assigned-cuntomer',
-  element:<AssignedCustomers></AssignedCustomers>
+  element:<AgentRoute><AssignedCustomers></AssignedCustomers></AgentRoute>
+},
+{
+  path:'manage-blogs',
+  element:<AdminAndAgentRoute><ManageBlogs></ManageBlogs></AdminAndAgentRoute>
+},
+{
+  path:'policy-clearance',
+  element:<AgentRoute><PolicyClearance></PolicyClearance></AgentRoute>
+},
+{
+  path:'my-policies',
+  element:<CustomerRoute><MyPolicies></MyPolicies></CustomerRoute>
+},
+{
+  path:'payment-status',
+  element:<CustomerRoute><PaymentStatus></PaymentStatus></CustomerRoute>
+},
+
+{
+  path:'payment/:policyId',
+  element:<CustomerRoute><Payment></Payment></CustomerRoute>
+},
+{
+  path:'claim-request',
+  element:<CustomerRoute><ClaimRequest></ClaimRequest></CustomerRoute>
 },
 {
   path:'profile-page',
   element:<ProfilePage></ProfilePage>
 },
 {
-  path:'payment-status',
-  element:<PaymentStatus></PaymentStatus>
-},
-{
-  path:'payment/:policyId',
-  element:<Payment></Payment >
-},
-{
-  path:'claim-request',
-  element:<ClaimRequest></ClaimRequest >
-},
-{
-  path:'policy-clearance',
-  element:<PolicyClearance></PolicyClearance >
-},
-{
-  path:'manage-transactions',
-  element:<ManageTransactions></ManageTransactions >
-},
-{
   path:'rejected-applications',
-  element:<RejectedApplications></RejectedApplications >
+  element:<CustomerRoute><RejectedApplications></RejectedApplications></CustomerRoute>
 },
 
     ]

@@ -11,10 +11,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout =  () => {
-         console.log(localStorage.getItem("1st",'token'));
+        //  console.log(localStorage.getItem("1st",'token'));
 
      logoutUser().then(()=>localStorage.removeItem("token"))
-     console.log(localStorage.getItem("2nd",'token'));
+     
+    //  console.log(localStorage.getItem("2nd",'token'));
      
     navigate("/");
   };

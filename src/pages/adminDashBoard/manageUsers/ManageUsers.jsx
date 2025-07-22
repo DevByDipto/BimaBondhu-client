@@ -2,17 +2,18 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAxios from '../../../hooks/useAxios';
 import { useState } from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ManageUsers = () => {
   const queryClient = useQueryClient();
-  const axiosInstance = useAxios();
+  const axiosSecure= useAxiosSecure();
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   // Load all users
   const { data: users = [], isLoading } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosInstance.get('/users');
+      const res = await axiosSecure.get('/users');
       return res.data;
     }
   });
@@ -20,7 +21,7 @@ const ManageUsers = () => {
   // Delete user mutation
   const deleteUserMutation = useMutation({
     mutationFn: async (id) => {
-      return await axiosInstance.delete(`/users/${id}`);
+      return await axiosSecure.delete(`/users/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['users']);
@@ -34,7 +35,7 @@ const ManageUsers = () => {
   // Update Role Mutation
   const updateRoleMutation = useMutation({
     mutationFn: async ({ id, role }) => {
-      return await axiosInstance.patch(`/users/${id}`, { role });
+      return await axiosSecure.patch(`/users/${id}`, { role });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['users']);

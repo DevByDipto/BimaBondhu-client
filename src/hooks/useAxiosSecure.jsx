@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const axiosSecure = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}`, 
@@ -23,7 +24,8 @@ const useAxiosSecure = () => {
       return res;
     },
     (err) => {
-      console.log({ err });
+      toast.error( err.message );
+      
       const status = err.status;
       if (status == 403) {
         navigate("/forbiden");

@@ -5,6 +5,7 @@ import Select from "react-select";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const healthOptions = [
   { value: "diabetes", label: "Diabetes" },
@@ -18,7 +19,7 @@ const ApplicationForm = () => {
   const { user, loading } = useAuth();
   // console.log(loading, user.email, { policyId });
 
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -53,10 +54,10 @@ const ApplicationForm = () => {
       agent_status:"pending"
     };
 
-    console.log(applicationData);
+    // console.log(applicationData);
 
    try {
-  const res = await axiosInstance.post("/applications", applicationData);
+  const res = await axiosSecure.post("/applications", applicationData);
   
   Swal.fire({
   position: "top-end",
@@ -67,7 +68,7 @@ const ApplicationForm = () => {
 });
   // toast.success('application added successfull')
 // alert("application added successfull")
-  console.log("Application submitted:", res.data);
+  // console.log("Application submitted:", res.data);
   
 } catch (err) {
   console.error(err);

@@ -22,7 +22,7 @@ const MyPolicies = () => {
     },
     enabled: !!user?.email,
   });
-console.log(myPolicies);
+// console.log(myPolicies);
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -108,7 +108,7 @@ console.log(myPolicies);
       {/* Modal */}
       {selectedPolicy && (
         <div className="fixed inset-0  bg-opacity-40 z-50 flex justify-center items-center">
-          <div className=" p-6 rounded-xl bg-gray-800 w-full max-w-md">
+          <div className=" p-6 rounded-xl bg-gray-300 w-full max-w-md">
             <h3 className="text-lg font-semibold mb-2">
               Submit Review for: {selectedPolicy.policy_title}
             </h3>

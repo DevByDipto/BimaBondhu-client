@@ -70,12 +70,12 @@ const [policiesData,setPoliciesData] = useState()
 const handleSelect = async(e)=>{
   // setSelectedCategory(e.target.value)
   const selecttedCatagory= e.target.value
-  console.log(e.target.value);
+  // console.log(e.target.value);
   
   const res = await axiosInstance.get(
         `/policies?category=${selecttedCatagory}`
       );
-      console.log(res.data.data);
+      // console.log(res.data.data);
       setPoliciesData(res.data)
       return res.data.data;
 }

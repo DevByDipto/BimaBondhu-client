@@ -97,8 +97,7 @@ const ClaimRequest = () => {
                 <td>{policy.policyDetails?.title}</td>
                 <td>{policy.policyDetails?.category}</td>
                 <td>${policy.policyDetails?.premium_per_month}</td>
-{console.log(index + 1,policy?.claim_status,{policy})
-}
+
                 {/* ✅ Claim Status Column */}
                 <td className="font-semibold">
                   {policy.claim_status ? (

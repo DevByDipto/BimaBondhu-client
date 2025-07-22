@@ -4,11 +4,14 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 import SocalLogin from "../socalLogin/SocalLogin";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const axiosInstance = useAxios()
   const navigate = useNavigate()
 const location = useLocation()
+// console.log(location);
+
   const {
     register,
     handleSubmit,
@@ -20,7 +23,7 @@ const location = useLocation()
 
     signInUser(data.email, data.password)
       .then(async (result) => {
-        console.log(result.user);
+        // console.log(result.user);
         const lastLoginTime = new Date(
           result.user.metadata.lastSignInTime
         )
@@ -29,11 +32,11 @@ const location = useLocation()
           `/user/update-last-login?email=${email}`,
           {lastLoginTime}
         );
-        console.log("userinfo", userRes.data);
+        // console.log("userinfo", userRes.data);
         navigate(location.state || '/')
 
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.message));
   };
 
   return (

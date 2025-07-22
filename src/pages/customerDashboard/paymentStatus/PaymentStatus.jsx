@@ -15,7 +15,7 @@ const PaymentStatus = () => {
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (!applications.length) return <p className="text-center">No application found</p>;
-console.log(applications);
+// console.log(applications);
 
   // ✅ filter only approved applications
   const approvedApplications = applications.filter(app => app.application_status === 'approved');

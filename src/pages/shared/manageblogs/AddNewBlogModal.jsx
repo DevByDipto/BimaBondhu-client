@@ -6,7 +6,7 @@ import useUserRole from '../../../hooks/useUserRole';
 const AddNewBlogModal = ({ isOpen, onClose, onAdd }) => {
   const { user } = useAuth();
   const {role,roleLoder} = useUserRole()
-  console.log(role);
+  // console.log(role);
   
   if(roleLoder){
     return "loading......"

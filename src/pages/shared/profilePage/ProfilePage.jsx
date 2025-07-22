@@ -2,10 +2,11 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxios from '../../../hooks/useAxios';
 import useAuth from '../../../hooks/useAuth';
 import { useState } from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ProfilePage = () => {
   const { user, loading } = useAuth();
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,18 +20,18 @@ const ProfilePage = () => {
     queryKey: ['user-info', user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosInstance.get(`/users?email=${user.email}`);
+      const res = await axiosSecure.get(`/users?email=${user.email}`);
       return res.data;
     },
   });
-console.log(userInfo);
+// console.log(userInfo);
 
   const updateMutation = useMutation({
     mutationFn: async (updatedData) => {
-        console.log(updatedData);
+        // console.log(updatedData);
         
-      const res = await axiosInstance.put(`/users/${user.email}`, updatedData);
-console.log(res);
+      const res = await axiosSecure.put(`/users/${user.email}`, updatedData);
+// console.log(res);
 
       return res.data;
     },
