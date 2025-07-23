@@ -1,13 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import useAxios from '../../../hooks/useAxios';
-import { useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useState } from 'react';
+import AgentInfoModal from './AgentInfoModal';
 
 const ManageUsers = () => {
   const queryClient = useQueryClient();
-  const axiosSecure= useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [selectedUserForAgent, setSelectedUserForAgent] = useState(null);
 
   // Load all users
   const { data: users = [], isLoading } = useQuery({
@@ -32,7 +33,7 @@ const ManageUsers = () => {
     }
   });
 
-  // Update Role Mutation
+  // Update role mutation for non-agent roles
   const updateRoleMutation = useMutation({
     mutationFn: async ({ id, role }) => {
       return await axiosSecure.patch(`/users/${id}`, { role });
@@ -43,6 +44,20 @@ const ManageUsers = () => {
     },
     onError: () => {
       Swal.fire('❌ Error', 'Failed to update role', 'error');
+    }
+  });
+
+  // Delete agent data mutation
+  const deleteAgentMutation = useMutation({
+    mutationFn: async (email) => {
+      return await axiosSecure.delete(`/agents/${email}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['users']);
+      Swal.fire('✅ Agent data removed', 'Agent info deleted successfully', 'success');
+    },
+    onError: () => {
+      Swal.fire('❌ Error', 'Failed to delete agent info', 'error');
     }
   });
 
@@ -60,8 +75,16 @@ const ManageUsers = () => {
     });
   };
 
-  const handleRoleChange = (userId, newRole) => {
-    updateRoleMutation.mutate({ id: userId, role: newRole });
+  const handleRoleChange = (userId, newRole, userObj) => {
+    if (newRole === "agent") {
+      setSelectedUserForAgent(userObj); // modal open করো agent info দেওয়ার জন্য
+    } else {
+      if (userObj.role === "agent") {
+        // agent থেকে অন্য রোলে গেলে agent data মুছে ফেলো
+        deleteAgentMutation.mutate(userObj.email);
+      }
+      updateRoleMutation.mutate({ id: userId, role: newRole });
+    }
     setOpenDropdownId(null);
   };
 
@@ -106,13 +129,13 @@ const ManageUsers = () => {
                       <div className="absolute z-10 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div className="py-1 text-sm text-gray-700">
                           <button
-                            onClick={() => handleRoleChange(user._id, 'customer')}
+                            onClick={() => handleRoleChange(user._id, 'customer', user)}
                             className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                           >
                             Customer
                           </button>
                           <button
-                            onClick={() => handleRoleChange(user._id, 'agent')}
+                            onClick={() => handleRoleChange(user._id, 'agent', user)}
                             className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                           >
                             Agent
@@ -142,6 +165,13 @@ const ManageUsers = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Agent Info Modal */}
+      <AgentInfoModal
+        user={selectedUserForAgent}
+        isOpen={!!selectedUserForAgent}
+        onClose={() => setSelectedUserForAgent(null)}
+      />
     </div>
   );
 };

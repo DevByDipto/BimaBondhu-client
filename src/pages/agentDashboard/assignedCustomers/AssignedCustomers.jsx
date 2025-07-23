@@ -5,8 +5,10 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import DownloadPolicyButton from "./DownloadPolicyButton";
+import useAuth from "../../../hooks/useAuth";
 
 const AssignedCustomers = () => {
+  const {user} = useAuth()
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState(null);
@@ -15,18 +17,21 @@ const AssignedCustomers = () => {
   const [rejectingAppId, setRejectingAppId] = useState(null);
   const navigation = useNavigate();
 
+
   // 🔍 Get assigned applications
   const {
-    data: applications = [],
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["assigned-applications"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/applications");
-      return res.data;
-    },
-  });
+  data: applications = [],
+  isLoading,
+  isError,
+} = useQuery({
+  queryKey: ["assigned-applications", user?.email],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/applications/${user.email}`);
+    return res.data;
+  },
+  enabled: !!user?.email, // ✅ শুধু তখনই চালাবে যদি user.email truthy হয়
+});
+
 // console.log(applications);
 
   // 🔁 Status update mutation

@@ -1,23 +1,32 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
-const axiosSecure = axios.create({
+export const axiosSecure = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}`, 
 });
 
 const useAxiosSecure = () => {
-  const { logoutUser } = useAuth();
+  const {user, logoutUser } = useAuth();
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token')
-    // request interceptors
-    axiosSecure.interceptors.request.use(config=>{
+  useEffect(()=>{
+
+    const token = localStorage.getItem('token')
+      axiosSecure.interceptors.request.use(config=>{
         config.headers.authorization = `Bearer ${token}`
         return config
+     
     })
+console.log("tokenset",token);
+
+  },[user])
+  // console.log(token);
+  
+    // request interceptors
+  
 
   axiosSecure.interceptors.response.use(
     (res) => {

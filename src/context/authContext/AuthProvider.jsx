@@ -12,6 +12,7 @@ import {
 import { auth } from "../../firebase/firebase.init";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { axiosSecure } from "../../hooks/useAxiosSecure";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading,setLoading] = useState(true)
@@ -50,6 +51,7 @@ const signinWithGoogle=()=>{
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("token", res.data.token);
+              axiosSecure.defaults.headers.common['Authorization']=`Bearer ${res.data.token}`
             }
           })
           .catch(err=>toast.error(err.message))

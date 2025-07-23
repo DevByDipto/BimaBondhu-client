@@ -1,12 +1,41 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
+import { useEffect} from "react";
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAuth from '../../hooks/useAuth';
 
 const QuotePage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [estimatedPremium, setEstimatedPremium] = useState(null);
 const {id} = useParams()
+const axiosSecure = useAxiosSecure()
+
+
+
+const [alreadyApplied, setAlreadyApplied] = useState(false);
+const { user } = useAuth();
+
+useEffect(() => {
+  if (user?.email && id) {
+    axiosSecure
+      .get(`/applications/${user.email}`)
+      .then((res) => {
+        if (res.data.success) {
+          const appliedPolicies = res.data.applications;
+          const found = appliedPolicies.find(
+            (item) => item.policyId === id // id হচ্ছে current policy page এর id
+          );
+          if (found) {
+            setAlreadyApplied(true);
+          }
+        }
+      })
+      .catch((err) => console.error(err));
+  }
+}, [id, user?.email]);
+
 
   const calculatePremium = (data) => {
     const baseRatePerThousand = 10;
@@ -118,12 +147,17 @@ const {id} = useParams()
           </button>
 
           <button
-            type="button"
-            onClick={() => navigate(`/application-form/${id}`)}
-            className="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition"
-          >
-            Apply for Policy
-          </button>
+  disabled={alreadyApplied}
+  onClick={() => navigate(`/application-form/${id}`)}
+  className={`px-4 py-2 rounded ${
+    alreadyApplied
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-green-600 text-white hover:bg-green-700"
+  }`}
+>
+  {alreadyApplied ? "Already Applied" : "Apply for Policy"}
+</button>
+
         </div>
       </form>
 

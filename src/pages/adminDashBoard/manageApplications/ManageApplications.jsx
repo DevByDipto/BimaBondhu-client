@@ -35,8 +35,8 @@ const ManageApplications = () => {
 
   // ✅ Assign Mutation
   const assignMutation = useMutation({
-    mutationFn: async ({ applicationId, agentId }) => {
-      await axiosSecure.patch(`/assign-agent`, { applicationId, agentId });
+    mutationFn: async ({ applicationId, agentId,  agentEmail, }) => {
+      await axiosSecure.patch(`/assign-agent`, { applicationId, agentId,  agentEmail });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["applications"] });
@@ -182,7 +182,7 @@ const ManageApplications = () => {
                   </p>
                 </div>
                 <button
-                  onClick={() => assignMutation.mutate({ applicationId: selectedApplication._id, agentId: agent._id })}
+                  onClick={() => assignMutation.mutate({ applicationId: selectedApplication._id, agentId: agent._id,agentEmail: agent.email, })}
                   className="btn btn-sm btn-primary"
                 >
                   Assign

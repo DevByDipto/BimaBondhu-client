@@ -5,6 +5,8 @@ import { useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ProfilePage = () => {
+  // console.log("console from profile");
+  
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();

@@ -69,6 +69,8 @@ const MyPolicies = () => {
           <tbody>
             {myPolicies.map((item, index) => (
               <tr key={item._id}>
+               { console.log(item)}
+                
                 <td>{index + 1}</td>
                 <td>{item.policy_title}</td>
                 <td>{item.coverage}</td>
@@ -77,14 +79,14 @@ const MyPolicies = () => {
                 <td>
                   <span
                     className={`px-2 py-1 rounded text-white text-sm ${
-                      item.status === "Approved"
+                      item.application_status === "Approved"
                         ? "bg-green-500"
-                        : item.status === "Rejected"
+                        : item.application_status === "Rejected"
                         ? "bg-red-500"
                         : "bg-yellow-500"
                     }`}
                   >
-                    {item.status}
+                    {item.application_status}
                   </span>
                 </td>
                 <td>
