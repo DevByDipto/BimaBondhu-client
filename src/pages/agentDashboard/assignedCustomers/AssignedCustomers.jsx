@@ -92,7 +92,7 @@ const AssignedCustomers = () => {
 
   if (isLoading) return <p className="text-center py-10">Loading customers...</p>;
   if (isError) return <p className="text-center text-red-500">❌ Failed to load data</p>;
-console.log(applications);
+// console.log(applications);
 
   return (
     <div className="p-6">
@@ -113,8 +113,8 @@ console.log(applications);
             {applications.map((app) =>
               app.agent_status === "approved" ? (
                 <tr key={app._id} className="border-b">
-                  {console.log(app)
-                  }
+                  {/* {console.log(app)
+                  } */}
                   <td>{app?.name || "N/A"}</td>
                   <td>{app?.email}</td>
                   <td>
