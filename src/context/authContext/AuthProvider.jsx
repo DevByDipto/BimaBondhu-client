@@ -51,7 +51,7 @@ const signinWithGoogle=()=>{
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("token", res.data.token);
-              axiosSecure.defaults.headers.common['Authorization']=`Bearer ${res.data.token}`
+              // axiosSecure.defaults.headers.common['Authorization']=`Bearer ${res.data.token}`
             }
           })
           .catch(err=>toast.error(err.message))

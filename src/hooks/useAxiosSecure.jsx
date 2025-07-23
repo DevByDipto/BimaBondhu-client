@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { configs } from "eslint-plugin-react-refresh";
 
 export const axiosSecure = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}`, 
@@ -14,13 +15,16 @@ const useAxiosSecure = () => {
 
   useEffect(()=>{
 
-    const token = localStorage.getItem('token')
-      axiosSecure.interceptors.request.use(config=>{
-        config.headers.authorization = `Bearer ${token}`
-        return config
+    
+    axiosSecure.interceptors.request.use(config=>{
+        const token = localStorage.getItem('token')
+        if(token){
+          config.headers.authorization = `Bearer ${token}`
+          return config
+
+        }
      
     })
-console.log("tokenset",token);
 
   },[user])
   // console.log(token);
