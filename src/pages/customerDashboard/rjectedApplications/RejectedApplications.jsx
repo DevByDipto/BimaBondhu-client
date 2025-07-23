@@ -40,7 +40,7 @@ const RejectedApplications = () => {
           </thead>
           <tbody>
             {rejectedApplications.map((app, index) => {
-              console.log(app);
+              // console.log(app);
               
               const isAgentRejected = app.agent_status === "rejected";
               const isApplicationRejected =
