@@ -22,8 +22,12 @@ useEffect(() => {
     axiosSecure
       .get(`/applications/${user.email}`)
       .then((res) => {
-        if (res.data.success) {
-          const appliedPolicies = res.data.applications;
+        // console.log(res.data);
+        
+        if (res.data) {
+          const appliedPolicies = res.data;
+          // console.log(appliedPolicies);
+          
           const found = appliedPolicies.find(
             (item) => item.policyId === id // id হচ্ছে current policy page এর id
           );
@@ -36,6 +40,7 @@ useEffect(() => {
   }
 }, [id, user?.email]);
 
+// console.log(alreadyApplied);
 
   const calculatePremium = (data) => {
     const baseRatePerThousand = 10;
