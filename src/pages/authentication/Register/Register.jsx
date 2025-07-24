@@ -6,6 +6,7 @@ import SocalLogin from "../socalLogin/SocalLogin";
 import axios from "axios";
 import useAxios from "../../../hooks/useAxios";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 const Register = () => {
   const {
     register,
@@ -17,6 +18,8 @@ const Register = () => {
   const [profilePic, setProfilePic] = useState();
   const navigate = useNavigate();
   const location = useLocation();
+  const [uploading, setUploading] = useState(false);
+
 
   const onSubmit = (data) => {
     createUser(data.email, data.password)
@@ -24,7 +27,6 @@ const Register = () => {
         // console.log('from create user')
         // update user in database
         const lastLoginTime = result.user.metadata.lastSignInTime;
-        // console.log(data);
 
         const userInfo = {
           email: data.email,
@@ -41,25 +43,41 @@ const Register = () => {
         updateUserProfile(data.name, profilePic)
           .then(() => {
             // console.log('successfull')
+            console.log(profilePic);
+            
             navigate(location.state || "/");
           })
           .catch((err) => toast.error(err.message));
       })
+
       .catch((err) => toast.error(err.message));
   };
 
   const handleFileImageSubmite = async (e) => {
+    setUploading(true);
     const image = e.target.files[0];
     const formData = new FormData();
     formData.append("image", image);
-
-    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+  const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_IMAGE_UPLOAD_KEY
     }`;
 
-    const res = await axios.post(imageUploadUrl, formData);
+     try {
+         const res = await axios.post(imageUploadUrl, formData);
+           setProfilePic(res.data.data.url);
+         
+        } catch (error) {
+          console.error(error);
+          Swal.fire("Error", "Image upload failed", "error");
+        } finally {
+          setUploading(false);
+        }
+  
+
+    
     // console.log(res.data.data.url);
-    setProfilePic(res.data.data.url);
+  
+    
   };
 
   return (
@@ -103,7 +121,7 @@ const Register = () => {
                 className="file-input file-input-primary"
                 required
               />
-
+{uploading && <p className="text-blue-500">Uploading...</p>}
               {/* password */}
               <label className="label">Password</label>
               <input
@@ -135,7 +153,7 @@ const Register = () => {
               <div>
                 <a className="link link-hover">Forgot password?</a>
               </div>
-              <button className="btn btn-primary text-black mt-4">
+              <button className="btn btn-primary text-black mt-4" disabled={uploading}>
                 Register
               </button>
               <SocalLogin></SocalLogin>
