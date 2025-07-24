@@ -1,17 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
 
 const PaymentStatus = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth()
  const navigate = useNavigate()
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ['application-details'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/application-details');
+      const res = await axiosSecure.get(`/applicationDetails-by-email?email=${user.email}`);
       return res.data; // এটা এখন array হবে
     }
   });
+// console.log(applications,user.email);
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (!applications.length) return <p className="text-center">No application found</p>;
