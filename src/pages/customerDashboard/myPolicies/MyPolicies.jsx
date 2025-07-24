@@ -67,7 +67,8 @@ const MyPolicies = () => {
             </tr>
           </thead>
           <tbody>
-            {myPolicies.map((item, index) => (
+            {myPolicies.map((item, index) => { 
+              
               <tr key={item._id}>
                {/* { console.log(item)} */}
                 
@@ -98,7 +99,8 @@ const MyPolicies = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+
+            })}
           </tbody>
         </table>
 

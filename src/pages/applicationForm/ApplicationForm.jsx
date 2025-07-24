@@ -107,10 +107,12 @@ const ApplicationForm = () => {
               type="text"
               name="name"
               className="w-full border rounded p-2"
-              value={formData.name}
+              value={user?.displayName}
               onChange={handleChange}
               required
+              readOnly
             />
+           
           </div>
           <div>
             <label className="block font-medium mb-1">Email</label>
