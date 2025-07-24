@@ -104,6 +104,7 @@ const AssignedCustomers = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th>Policy Name</th>
               <th>Status</th>
               <th>Action</th>
               <th>Update Status</th>
@@ -117,6 +118,7 @@ const AssignedCustomers = () => {
                   } */}
                   <td>{app?.name || "N/A"}</td>
                   <td>{app?.email}</td>
+                  <td>{app?.policy_title}</td>
                   <td>
                     <span
                       className={`px-2 py-1 rounded text-white ${
