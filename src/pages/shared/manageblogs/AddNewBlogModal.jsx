@@ -66,6 +66,14 @@ const AddNewBlogModal = ({ isOpen, onClose, onAdd }) => {
               <input value={user?.photoURL || ''} className="input input-bordered w-full" readOnly />
             </div>
             <div>
+  <label className="label">Published At</label>
+  <input
+    value={formatISO(new Date())}
+    readOnly
+    className="input input-bordered w-full"
+  />
+</div>
+            <div>
               <label className="label">Publish Blog?</label>
               <select {...register('isPublished')} className="select select-bordered w-full">
                 <option value="false">Draft</option>
