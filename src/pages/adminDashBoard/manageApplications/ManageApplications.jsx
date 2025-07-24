@@ -23,6 +23,7 @@ const ManageApplications = () => {
       return res.data;
     },
   });
+console.log(applications);
 
   // ✅ Load Agents
   const { data: agents = [] } = useQuery({
@@ -113,6 +114,8 @@ const ManageApplications = () => {
         <tbody>
           {applications.map((app, index) => (
             <tr key={app._id}>
+              {/* {console.log(app)
+              } */}
               <td>{index + 1}</td>
               <td>{app.name}</td>
               <td>{app.email}</td>

@@ -107,10 +107,8 @@ const ApplicationForm = () => {
               type="text"
               name="name"
               className="w-full border rounded p-2"
-              value={user?.displayName}
               onChange={handleChange}
               required
-              readOnly
             />
            
           </div>
