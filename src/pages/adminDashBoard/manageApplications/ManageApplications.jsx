@@ -23,7 +23,7 @@ const ManageApplications = () => {
       return res.data;
     },
   });
-console.log(applications);
+// console.log(applications);
 
   // ✅ Load Agents
   const { data: agents = [] } = useQuery({
