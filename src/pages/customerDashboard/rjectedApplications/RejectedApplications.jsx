@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const RejectedApplications = () => {
   const axiosSecure = useAxiosSecure();
-
+  const { user } = useAuth();
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ["rejected-applications"],
     queryFn: async () => {
@@ -41,7 +42,7 @@ const RejectedApplications = () => {
           <tbody>
             {rejectedApplications.map((app, index) => {
               // console.log(app);
-              
+
               const isAgentRejected = app.agent_status === "rejected";
               const isApplicationRejected =
                 app.application_status === "rejected";
@@ -61,20 +62,23 @@ const RejectedApplications = () => {
               const formattedDate = new Date(
                 app?.created_at
               ).toLocaleDateString("en-GB");
-
-              return (
-                <tr key={app._id}>
-                  <td>{index + 1}</td>
-                  <td>{app.name}</td>
-                  <td>{app.email}</td>
-                  <td>{rejectionType}</td>
-                  <td className="max-w-xs whitespace-pre-wrap">
-                    {rejectionReason}
-                  </td>
-                  <td>{formattedDate}</td>
-                  <td className="text-red-500 font-semibold">{statusLabel}</td>
-                </tr>
-              );
+              if (app?.email === user?.email) {
+                return (
+                  <tr key={app._id}>
+                    <td>{index + 1}</td>
+                    <td>{app.name}</td>
+                    <td>{app.email}</td>
+                    <td>{rejectionType}</td>
+                    <td className="max-w-xs whitespace-pre-wrap">
+                      {rejectionReason}
+                    </td>
+                    <td>{formattedDate}</td>
+                    <td className="text-red-500 font-semibold">
+                      {statusLabel}
+                    </td>
+                  </tr>
+                );
+              }
             })}
           </tbody>
         </table>

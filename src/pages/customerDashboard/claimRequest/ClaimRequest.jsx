@@ -3,10 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const ClaimRequest = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedPolicy, setSelectedPolicy] = useState(null);
+  const {user} = useAuth()
   const [reason, setReason] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -72,6 +74,7 @@ const ClaimRequest = () => {
       Swal.fire("Error", "Failed to submit claim", "error");
     }
   };
+// console.log("user",user?.email);
 
   return (
     <div className="p-5">
@@ -91,8 +94,13 @@ const ClaimRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {approvedPolicies.map((policy, index) => (
-              <tr key={policy._id}>
+            {approvedPolicies.map((policy, index) => {
+if(policy?.email === user?.email){
+
+
+            
+             return <tr key={policy._id}>
+                {/* {console.log("polocy",policy?.email)} */}
                 <td>{index + 1}</td>
                 <td>{policy.policyDetails?.title}</td>
                 <td>{policy.policyDetails?.category}</td>
@@ -130,8 +138,8 @@ const ClaimRequest = () => {
                     Claim
                   </button>
                 </td>
-              </tr>
-            ))}
+              </tr>}
+            })}
           </tbody>
         </table>
       </div>

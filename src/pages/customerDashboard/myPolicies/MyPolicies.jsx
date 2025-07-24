@@ -68,8 +68,10 @@ const MyPolicies = () => {
           </thead>
           <tbody>
             {myPolicies.map((item, index) => 
-              
+             
               <tr key={item._id}>
+                 {console.log(item)
+              }
                {/* { console.log(item)
                }
                { console.log(item.policy_title)

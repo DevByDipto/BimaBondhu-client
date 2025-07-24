@@ -10,11 +10,10 @@ const PaymentStatus = () => {
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ['application-details'],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/applicationDetails-by-email?email=${user.email}`);
+      const res = await axiosSecure.get('/application-details');
       return res.data; // এটা এখন array হবে
     }
   });
-// console.log(applications,user.email);
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (!applications.length) return <p className="text-center">No application found</p>;
@@ -40,8 +39,13 @@ const PaymentStatus = () => {
           </tr>
         </thead>
         <tbody>
-          {approvedApplications.map((app, index) => (
-            <tr key={app._id} className="border-t">
+          {approvedApplications.map((app, index) => {
+
+          
+          if (app.email=== user.email) {
+            
+        
+           return <tr key={app._id} className="border-t">
               <td>{index + 1}</td>
               <td>{app.policyDetails?.title || 'N/A'}</td>
               <td>${app.policyDetails?.premium_per_month}</td>
@@ -68,8 +72,8 @@ const PaymentStatus = () => {
                   {app.payment_status === 'paid' ? 'Already Paid' : 'Pay Now'}
                 </button>
               </td>
-            </tr>
-          ))}
+            </tr>  }}
+          )}
         </tbody>
       </table>
     </div>
