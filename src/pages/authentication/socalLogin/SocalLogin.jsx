@@ -15,9 +15,11 @@ signinWithGoogle()
 .then(async(result)=>{
   const lastLoginTime = result.user.metadata.lastSignInTime
 
+
   const userInfo={
   email: result.user.email,
   role:'customer' ,// default role
+  name: result.user.displayName,
   created_at: new Date(),
   last_log_in: new Date(lastLoginTime)
 }

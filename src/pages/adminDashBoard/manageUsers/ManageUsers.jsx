@@ -114,7 +114,9 @@ const ManageUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                {console.log(user,user.create_at)
+                }
+                <td>{new Date(user.created_at).toLocaleDateString()}</td>
                 <td>
                   <div className="relative inline-block text-left">
                     <button
