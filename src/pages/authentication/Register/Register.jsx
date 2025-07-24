@@ -43,7 +43,7 @@ const Register = () => {
         updateUserProfile(data.name, profilePic)
           .then(() => {
             // console.log('successfull')
-            console.log(profilePic);
+            // console.log(profilePic);
             
             navigate(location.state || "/");
           })

@@ -3,17 +3,18 @@ import useAxios from '../../../hooks/useAxios';
 import useAuth from '../../../hooks/useAuth';
 import { useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
 
 const ProfilePage = () => {
   // console.log("console from profile");
   
-  const { user, loading } = useAuth();
+  const { user,updateUserProfile, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', photo: '' });
-
+const [profileChange,setProfileChange] = useState(false)
   const {
     data: userInfo,
     isLoading,
@@ -55,6 +56,7 @@ const ProfilePage = () => {
     });
     setIsModalOpen(true);
   };
+  
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -63,6 +65,12 @@ const ProfilePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateMutation.mutate(formData);
+    // console.log(formData.name,formData.photo);
+    
+    updateUserProfile(formData.name,formData.photo).then(()=> setProfileChange(!profileChange))
+    .catch((err)=>toast.error(err.message))
+
+
   };
 
   return (
