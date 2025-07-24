@@ -79,7 +79,7 @@ const ApplicationForm = () => {
 
       refetch(); // ✅ Refetch after submit to update alreadyApplied
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       Swal.fire({
         title: "Error!",
         text: "Submission failed!",

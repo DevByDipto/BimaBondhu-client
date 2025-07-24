@@ -22,7 +22,7 @@ const ClaimRequest = () => {
     },
   });
 
-  //   console.log(approvedPolicies);
+    console.log(approvedPolicies);
 
   // ✅ Upload image to imgbb
   const handleImageUpload = async (e) => {
@@ -54,11 +54,12 @@ const ClaimRequest = () => {
       policy_name: selectedPolicy.policyDetails.title,
       policy_amount: selectedPolicy.policyDetails.coverage_amount,
       user_email: selectedPolicy.email,
+      agent_email: selectedPolicy.agent_email,
       reason,
       document: imageUrl,
       claim_status: "pending",
     };
-// console.log(claimData);
+console.log(claimData);
 
     try {
       await axiosSecure.post("/claims", claimData);
