@@ -19,6 +19,7 @@ const PaymentStatus = () => {
 
   // ✅ filter only approved applications
   const approvedApplications = applications.filter(app => app.application_status === 'approved');
+console.log(applications);
 
   return (
     <div className="overflow-x-auto  m-5">
@@ -48,9 +49,11 @@ const PaymentStatus = () => {
                     app.payment_status === 'due' ? 'text-red-500' : 'text-green-600'
                   }`}
                 >
-                  {app.payment_status?.toUpperCase()}
+                  {app.payment_status ?  app.payment_status?.toUpperCase() : "DUE"}
                 </span>
               </td>
+                {console.log(app.payment_status)
+                }
               <td>
                 <button
                   disabled={app.payment_status === 'paid'}

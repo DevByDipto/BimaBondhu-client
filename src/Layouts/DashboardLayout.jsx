@@ -77,15 +77,16 @@ const DashboardLayout = () => {
         <FaHome className="mr-2" /> Home
       </NavLink>
     </li>
-    {/* customer */}
-   {role === "customer" && (
-  <>  
-   
     <li>
       <NavLink to="profile-page">
         <FaUser className="mr-2" /> Profile
       </NavLink>
     </li>
+    {/* customer */}
+   {role === "customer" && (
+  <>  
+   
+    
     <li>
       <NavLink to="my-policies">
         <FaClipboardList className="mr-2" /> My Policies
