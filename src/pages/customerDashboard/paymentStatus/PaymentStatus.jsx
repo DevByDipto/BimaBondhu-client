@@ -30,7 +30,7 @@ const PaymentStatus = () => {
       <table className="table  border border-gray-300 mt-5">
         <thead className="">
           <tr>
-            <th>#</th>
+            {/* <th>#</th> */}
             <th>Policy Title</th>
             <th>Premium / Month</th>
             <th>Payment Frequency</th>
@@ -46,7 +46,7 @@ const PaymentStatus = () => {
             
         
            return <tr key={app._id} className="border-t">
-              <td>{index + 1}</td>
+              {/* <td>{index + 1}</td> */}
               <td>{app.policyDetails?.title || 'N/A'}</td>
               <td>${app.policyDetails?.premium_per_month}</td>
               <td>Monthly</td>

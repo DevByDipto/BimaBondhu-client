@@ -22,7 +22,7 @@ const PolicyClearance = () => {
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   
-  // console.log(user.email);
+  // console.log(policies);
 
   return (
     <div className="p-4">
@@ -33,7 +33,7 @@ const PolicyClearance = () => {
         <table className="table table-zebra w-full">
           <thead>
             <tr>
-              <th>#</th>
+              {/* <th>#</th> */}
               <th>Policy Name</th>
               <th>Amount</th>
               <th>View</th>
@@ -41,10 +41,12 @@ const PolicyClearance = () => {
           </thead>
           <tbody>
             {policies.map((policy, index) => {
-              if (policy) {
+              if (policy.agent_email === user.email) {
+                console.log(policy.agent_email);
+                
                 return (
                   <tr key={policy._id}>
-                    <td>{index + 1}</td>
+                    {/* <td>{index + 1}</td> */}
                     <td>{policy.policy_name}</td>
                     <td>${policy.policy_amount}</td>
                     <td>

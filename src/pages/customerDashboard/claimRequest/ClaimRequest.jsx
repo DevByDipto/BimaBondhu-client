@@ -86,7 +86,7 @@ const ClaimRequest = () => {
         <table className="table table-zebra w-full">
           <thead>
             <tr>
-              <th>#</th>
+              {/* <th>#</th> */}
               <th>Policy Name</th>
               <th>Category</th>
               <th>Premium</th>
@@ -98,11 +98,9 @@ const ClaimRequest = () => {
             {approvedPolicies.map((policy, index) => {
 if(policy?.email === user?.email){
 
-
-            
              return <tr key={policy._id}>
                 {/* {console.log("polocy",policy?.email)} */}
-                <td>{index + 1}</td>
+                {/* <td>{index + 1}</td> */}
                 <td>{policy.policyDetails?.title}</td>
                 <td>{policy.policyDetails?.category}</td>
                 <td>${policy.policyDetails?.premium_per_month}</td>

@@ -30,7 +30,7 @@ const RejectedApplications = () => {
         <table className="table table-zebra w-full text-sm">
           <thead>
             <tr>
-              <th>#</th>
+              {/* <th>#</th> */}
               <th>Name</th>
               <th>Email</th>
               <th>Rejection Type</th>
@@ -65,7 +65,7 @@ const RejectedApplications = () => {
               if (app?.email === user?.email) {
                 return (
                   <tr key={app._id}>
-                    <td>{index + 1}</td>
+                    {/* <td>{index + 1}</td> */}
                     <td>{app.name}</td>
                     <td>{app.email}</td>
                     <td>{rejectionType}</td>
