@@ -11,7 +11,7 @@ const PolicyClearance = () => {
   const { data: policies = [], isLoading } = useQuery({
     queryKey: ["all-policies-for-clearance"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/policiesClearance?email=${user.email}`);
+      const res = await axiosSecure.get(`/policiesClearance`);
       return res.data;
     },
   });
@@ -21,7 +21,8 @@ const PolicyClearance = () => {
   };
 
   if (isLoading) return <p className="text-center">Loading...</p>;
-  console.log(policies);
+  // console.log(policies);
+  // console.log(user.email);
 
   return (
     <div className="p-4">

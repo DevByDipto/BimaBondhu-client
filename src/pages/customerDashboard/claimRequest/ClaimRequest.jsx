@@ -22,7 +22,7 @@ const ClaimRequest = () => {
     },
   });
 
-    console.log(approvedPolicies);
+    // console.log(approvedPolicies);
 
   // ✅ Upload image to imgbb
   const handleImageUpload = async (e) => {
@@ -59,7 +59,7 @@ const ClaimRequest = () => {
       document: imageUrl,
       claim_status: "pending",
     };
-console.log(claimData);
+// console.log(claimData);
 
     try {
       await axiosSecure.post("/claims", claimData);

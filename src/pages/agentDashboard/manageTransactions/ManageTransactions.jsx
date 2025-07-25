@@ -8,16 +8,17 @@ const ManageTransactions = () => {
   const { data: transactions = [], isLoading } = useQuery({
     queryKey: ['transactions'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/claims');
+      const res = await axiosSecure.get('/payments');
       return res.data;
     }
   });
+// console.log(transactions);
 
   const totalIncome = transactions?.reduce((sum, item) => {
-  if (item.claim_status === 'pending' || item.claim_status === 'aproved' ) {
+  if (item.payment_status === 'paid'  ) {
    
     
-    const amount = item.policy_amount ? Number(item.policy_amount ) : 0
+    const amount = item.amount ? Number(item.amount ) : 0
 // console.log(amount);
 
     return sum + amount;
@@ -55,10 +56,10 @@ const ManageTransactions = () => {
               <tr key={tx._id}>
                 <td>{index + 1}</td>
                 <td>{tx._id}</td>
-                <td>{tx.user_email}</td>
+                <td>{tx.userEmail}</td>
                 <td>{tx.policy_name}</td>
-                <td>${tx.policy_amount}</td>
-                <td>{format(new Date(tx.requested_at), 'PPP p')}</td>
+                <td>${tx.amount}</td>
+                <td>{format(new Date(tx.paid_at), 'PPP p')}</td>
                 <td className=''>Success</td>
               </tr>
             ))}
