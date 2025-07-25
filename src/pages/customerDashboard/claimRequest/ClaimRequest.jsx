@@ -59,7 +59,7 @@ const ClaimRequest = () => {
       document: imageUrl,
       claim_status: "pending",
     };
-// console.log(claimData);
+// console.log({claimData});
 
     try {
       await axiosSecure.post("/claims", claimData);
@@ -109,6 +109,8 @@ if(policy?.email === user?.email){
 
                 {/* ✅ Claim Status Column */}
                 <td className="font-semibold">
+                  {/* {console.log(policy)
+                      } */}
                   {policy.claim_status ? (
                     <span
                       className={
@@ -119,6 +121,8 @@ if(policy?.email === user?.email){
                           : "text-gray-500"
                       }
                     >
+                      {/* {console.log(policy)
+                      } */}
                       {policy.claim_status.toUpperCase()}
                     </span>
                   ) : (

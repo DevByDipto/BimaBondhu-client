@@ -21,7 +21,7 @@ const PolicyClearance = () => {
   };
 
   if (isLoading) return <p className="text-center">Loading...</p>;
-  // console.log(policies);
+  
   // console.log(user.email);
 
   return (
