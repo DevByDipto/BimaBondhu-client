@@ -43,7 +43,7 @@ const PaymentForm = () => {
     if (!stripe || !elements) {
       return;
     }
-
+ SetLoading(true)
     const card = elements.getElement(CardElement);
     if (card == null) {
       return;
@@ -101,7 +101,7 @@ const PaymentForm = () => {
 
           try {
              const res = await axiosSecure.post("/savePaymentInfo", paymentInfo);
-            SetLoading(true)
+           
             if (res.data.paymentInsert.insertedId) {
             // console.log("paymen success");
             Swal.fire({
@@ -181,6 +181,8 @@ SetLoading(false)
 
     {/* Submit Button */}
     {loading && <p className="text-blue-500">loading...</p>}
+    {console.log(loading)
+    }
     <button
       className="btn btn-primary text-black w-full mt-5"
       type="submit"
