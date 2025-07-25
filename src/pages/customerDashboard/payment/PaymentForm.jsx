@@ -5,12 +5,14 @@ import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { policyId } = useParams();
+  const [loading,SetLoading] = useState(false)
   // console.log(policyId);
   
   const { user } = useAuth();
@@ -96,10 +98,11 @@ const PaymentForm = () => {
             transactionId: result.paymentIntent.id,
           };
 
-          const res = await axiosSecure.post("/savePaymentInfo", paymentInfo);
-          // console.log(res.data);
-          
-          if (res.data.paymentInsert.insertedId) {
+
+          try {
+             const res = await axiosSecure.post("/savePaymentInfo", paymentInfo);
+            SetLoading(true)
+            if (res.data.paymentInsert.insertedId) {
             // console.log("paymen success");
             Swal.fire({
               icon: "success",
@@ -110,6 +113,15 @@ const PaymentForm = () => {
               navigate("/dashboard/payment-status"); // redirect after confirmation
             });
           }
+          } catch (error) {
+            toast.error(error.message)
+          }finally{
+SetLoading(false)
+          }
+         
+          // console.log(res.data);
+          
+          
         }
       }
     }
@@ -171,7 +183,7 @@ const PaymentForm = () => {
     <button
       className="btn btn-primary text-black w-full mt-5"
       type="submit"
-      disabled={!stripe}
+      disabled={!stripe || loading}
     >
       Pay policy premium cost ${policyInfo?.premium_per_month}
     </button>
