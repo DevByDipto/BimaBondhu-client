@@ -43,6 +43,7 @@ const PaymentStatus = () => {
 
           
           if (app.email=== user.email) {
+            // console.log(app);
             
         
            return <tr key={app._id} className="border-t">
@@ -59,7 +60,7 @@ const PaymentStatus = () => {
                   {app.payment_status ?  app.payment_status?.toUpperCase() : "DUE"}
                 </span>
               </td>
-                {/* {console.log(app.payment_status)
+                {/* {console.log(app)
                 } */}
               <td>
                 <button
@@ -67,7 +68,7 @@ const PaymentStatus = () => {
                   className={`px-4 py-1 rounded ${
                     app.payment_status === 'paid' ? 'bg-gray-300 text-black cursor-not-allowed' : 'bg-green-500 text-white'
                   }`}
-                  onClick={()=>navigate(`/dashboard/payment/${app.policyDetails._id}`)}
+                  onClick={()=>navigate(`/dashboard/payment/${app._id}`)}
                 >
                   {app.payment_status === 'paid' ? 'Already Paid' : 'Pay Now'}
                 </button>

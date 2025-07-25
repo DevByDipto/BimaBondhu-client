@@ -11,7 +11,7 @@ const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const { policyId } = useParams();
+  const { applicationId } = useParams();
   const [loading,SetLoading] = useState(false)
   // console.log(policyId);
   
@@ -21,9 +21,9 @@ const PaymentForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const { isPending, data: policyInfo } = useQuery({
-    queryKey: ["parcel", policyId],
+    queryKey: ["parcel", applicationId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/policies?id=${policyId}`);
+      const res = await axiosSecure.get(`/policies?id=${applicationId}`);
       return res.data.data;
     },
   });
@@ -63,7 +63,7 @@ const PaymentForm = () => {
       // step-2 create payment instance
       const res = await axiosSecure.post("/create-payment-intent", {
         amountIncents,
-        policyId,
+        policyId: policyInfo._id,
       });
 
       const clientSecret = res.data.clientSecret;
@@ -86,21 +86,23 @@ const PaymentForm = () => {
         if (result.paymentIntent.status === "succeeded") {
           // console.log("Payment successful!");
           // console.log(result);
+// console.log({policyId: policyInfo._id,});
 
           // mark parcel payed also create a payment history
           const paymentInfo = {
-            policyId,
+            policyId: policyInfo._id,
             policy_name: policyInfo.title,
             payment_status: 'success',
             userEmail: user.email,
             amount,
             method: result.paymentIntent.payment_method_types,
             transactionId: result.paymentIntent.id,
+            applicationId,
           };
 
 
           try {
-             const res = await axiosSecure.post("/savePaymentInfo", paymentInfo);
+             const res = await axiosSecure.post(`/savePaymentInfo?id=${policyInfo._id}`, paymentInfo);
            
             if (res.data.paymentInsert.insertedId) {
             // console.log("paymen success");
@@ -181,8 +183,8 @@ SetLoading(false)
 
     {/* Submit Button */}
     {loading && <p className="text-blue-500">loading...</p>}
-    {console.log(loading)
-    }
+    {/* {console.log(loading)
+    } */}
     <button
       className="btn btn-primary text-black w-full mt-5"
       type="submit"

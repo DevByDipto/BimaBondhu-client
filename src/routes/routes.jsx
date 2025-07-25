@@ -131,7 +131,7 @@ export const router = createBrowserRouter([
 },
 
 {
-  path:'payment/:policyId',
+  path:'payment/:applicationId',
   element:<CustomerRoute><Payment></Payment></CustomerRoute>
 },
 {

@@ -42,7 +42,7 @@ const PolicyClearance = () => {
           <tbody>
             {policies.map((policy, index) => {
               if (policy.agent_email === user.email) {
-                console.log(policy.agent_email);
+                // console.log(policy.agent_email);
                 
                 return (
                   <tr key={policy._id}>
