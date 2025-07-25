@@ -180,6 +180,7 @@ SetLoading(false)
     </div>
 
     {/* Submit Button */}
+    {loading && <p className="text-blue-500">loading...</p>}
     <button
       className="btn btn-primary text-black w-full mt-5"
       type="submit"
