@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import SocalLogin from "../socalLogin/SocalLogin";
@@ -10,6 +10,7 @@ const Login = () => {
   const axiosInstance = useAxios()
   const navigate = useNavigate()
 const location = useLocation()
+const [loding,setLoading] = useState(false)
 // console.log(location);
 
   const {
@@ -20,7 +21,7 @@ const location = useLocation()
   const { signInUser } = useAuth();
 
   const onSubmit = (data) => {
-
+setLoading(true)
     signInUser(data.email, data.password)
       .then(async (result) => {
         // console.log(result.user);
@@ -34,9 +35,12 @@ const location = useLocation()
         );
         // console.log("userinfo", userRes.data);
         navigate(location.state || '/')
+        setLoading(false)
 
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => {toast.error(err.message)
+        setLoading(false)
+      });
   };
 
   return (
@@ -61,6 +65,7 @@ const location = useLocation()
                 {...register("password", { required: true, minLength: 6 })}
                 className="input"
                 placeholder="Password"
+                defaultValue='123456Aa'
               />
               {errors.password?.type === "required" && (
                 <p className="text-red-500">pass must required</p>
@@ -71,8 +76,8 @@ const location = useLocation()
               <div>
                 <a className="link link-hover">Forgot password?</a>
               </div>
-
-              <button className="btn btn-primary text-black mt-4">Login</button>
+{loding && <p className="text-blue-500">loading....</p>}
+              <button disabled={loding} className="btn btn-primary text-black mt-4">Login</button>
               <SocalLogin></SocalLogin>
               <p>
                 <small>

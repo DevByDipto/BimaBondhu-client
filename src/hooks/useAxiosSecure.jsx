@@ -38,6 +38,7 @@ const useAxiosSecure = () => {
     },
     (err) => {
       toast.error( err.message );
+      // console.log(err.message );
       
       const status = err.status;
       if (status == 403) {
