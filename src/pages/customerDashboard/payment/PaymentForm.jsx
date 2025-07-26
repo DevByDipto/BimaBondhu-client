@@ -23,7 +23,7 @@ const PaymentForm = () => {
   const { isPending, data: policyInfo } = useQuery({
     queryKey: ["parcel", applicationId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/policies?id=${applicationId}`);
+      const res = await axiosSecure.get(`/policyInfo?id=${applicationId}`);
       return res.data.data;
     },
   });

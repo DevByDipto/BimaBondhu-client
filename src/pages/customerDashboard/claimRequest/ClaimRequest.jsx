@@ -48,8 +48,10 @@ const ClaimRequest = () => {
   // ✅ Submit Claim
   const handleSubmit = async (e) => {
     e.preventDefault();
+// console.log(selectedPolicy);
 
     const claimData = {
+      application_id:selectedPolicy._id,
       policy_id: selectedPolicy.policyDetails._id,   
       policy_name: selectedPolicy.policyDetails.title,
       policy_amount: selectedPolicy.policyDetails.coverage_amount,
@@ -127,7 +129,8 @@ if(policy?.email === user?.email){
                     <span className="text-gray-400">NONE</span>
                   )}
                 </td>
-
+{/* {console.log(policy)
+} */}
                 {/* ✅ Claim Button (disabled if claim_status exists) */}
                 <td>
                   <button
