@@ -65,7 +65,7 @@ setLoading(true)
                 {...register("password", { required: true, minLength: 6 })}
                 className="input"
                 placeholder="Password"
-                defaultValue='123456Aa'
+                // defaultValue='123456Aa'
               />
               {errors.password?.type === "required" && (
                 <p className="text-red-500">pass must required</p>
