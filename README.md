@@ -5,7 +5,7 @@ It allows users to browse and filter insurance policies, generate personalized q
 Customers can make secure payments, track applications, and manage approved policies, while admins and agents manage policy assignments and content.
 
 ---
-<img src="screenshot.png" alt="BimaBondhu" width="700" />
+<img src="https://i.ibb.co.com/W4PBbjjV/Screenshot-2025-08-09-225322.png" alt="BimaBondhu" width="700" />
 ---
 
 ## 🌐 Live Project
@@ -106,7 +106,6 @@ npm run dev
 
 ### 3️⃣ Server Setup
 ```bash
-cd server
 npm install
 ```
 - Create `.env` file and add the **Server Environment Variables** (see below).
