@@ -5,6 +5,7 @@ import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import axios from "axios";
 
 const healthOptions = [
   { value: "diabetes", label: "Diabetes" },
@@ -67,7 +68,12 @@ const ApplicationForm = () => {
     };
 
     try {
-      await axiosSecure.post("/applications", applicationData);
+      await axios.post("/applications", applicationData,{
+        headers:{
+          "Content-Type":"application/json",
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
 
       Swal.fire({
         position: "top-end",
@@ -79,7 +85,7 @@ const ApplicationForm = () => {
 
       refetch(); // ✅ Refetch after submit to update alreadyApplied
     } catch (err) {
-      // console.error(err);
+      console.error(err);
       Swal.fire({
         title: "Error!",
         text: "Submission failed!",

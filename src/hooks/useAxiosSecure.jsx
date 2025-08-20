@@ -19,33 +19,31 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.request.use(config=>{
        if(user){
          const token = localStorage.getItem('token')
-        if(token){
+         console.log(token);
+         
+        // if(token){
           config.headers.authorization = `Bearer ${token}`
           return config
 
-        }
+        // }
        }
      
-    })
+    },error=>{return Promise.reject(error)})
 
-  },[user])
-  // console.log(token);
-  
-    // request interceptors
-  
-
-  axiosSecure.interceptors.response.use(
+     axiosSecure.interceptors.response.use(
     (res) => {
       return res;
     },
     (err) => {
-      toast.error( err.message );
+      // toast.error( err.message );
       // console.log(err.message );
       
       const status = err.status;
-      if (status == 403) {
-        navigate("/forbiden");
-      } else if (status == 401) {
+      // if (status == 403) {
+      //   navigate("/forbiden");
+      // } else
+        
+        if (status == 401) {
         logoutUser()
           .then(() => {
             localStorage.removeItem("token");
@@ -56,6 +54,13 @@ const useAxiosSecure = () => {
       return Promise.reject(err);
     }
   );
+  },[user,logoutUser,navigate])
+  // console.log(token);
+  
+    // request interceptors
+  
+
+ 
 
   return axiosSecure;
 };

@@ -34,6 +34,7 @@ import AdmineRoute from "../router/AdmineRoute";
 import AgentRoute from "../router/AgentRoute";
 import AdminAndAgentRoute from "../router/adminAndAgentRoute";
 import CustomerRoute from "../router/CustomerRoute";
+import About from "../pages/about/About";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
     {
       path:'/blogs',
       element:<Blogs></Blogs>
+    },
+    {
+      path:'/about',
+      element:<About></About>
     },
     {
       path:'/blogDetails/:blogId',

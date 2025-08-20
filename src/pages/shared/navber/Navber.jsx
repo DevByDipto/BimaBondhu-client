@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const handleLogout =  () => {
         //  console.log(localStorage.getItem("1st",'token'));
-
+localStorage.removeItem("token")
      logoutUser().then(()=>localStorage.removeItem("token"))
      
     //  console.log(localStorage.getItem("2nd",'token'));
@@ -53,6 +53,14 @@ const Navbar = () => {
         }
       >
         Blog
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"
+        }
+      >
+        About
       </NavLink>
      
       {/* {user && (

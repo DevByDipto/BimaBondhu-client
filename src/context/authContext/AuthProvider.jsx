@@ -45,23 +45,27 @@ const signinWithGoogle=()=>{
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log({currentUser});
         setUser(currentUser);
-         if (user?.email) {
+         if (currentUser?.email) {
         axios
-          .post(`${import.meta.env.VITE_API_BASE_URL}/jwt`, { email: user.email })
+          .post(`${import.meta.env.VITE_API_BASE_URL}/jwt`, { email: currentUser.email })
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("token", res.data.token);
               // axiosSecure.defaults.headers.common['Authorization']=`Bearer ${res.data.token}`
+                setLoading(false)
             }
           })
           .catch(err=>toast.error(err.message))
-      }
+      }else{
         setLoading(false)
+      }
+    
+    });
+  
       return () => {
         unsubscribe();
       };
-    });
-  });
+  },[]);
 
   const authInfo = {
     createUser,

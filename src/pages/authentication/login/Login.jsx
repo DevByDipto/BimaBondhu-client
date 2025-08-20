@@ -34,7 +34,8 @@ setLoading(true)
           {lastLoginTime}
         );
         // console.log("userinfo", userRes.data);
-        navigate(location.state || '/')
+        // navigate(location.state || '/')
+        window.location.replace(location.state || '/')
         setLoading(false)
 
       })

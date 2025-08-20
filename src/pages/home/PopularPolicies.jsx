@@ -18,7 +18,7 @@ const navigate = useNavigate()
   if (isLoading) return <p className="text-center text-lg py-10">লোড হচ্ছে...</p>;
 
   return (
-    <section className="mt-20 md:mt-32">
+    <section className="max-w-7xl mx-auto mt-20 md:mt-32">
        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Popular Policies</h2>
     
     <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
