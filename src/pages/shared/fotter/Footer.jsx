@@ -33,10 +33,10 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Follow Us</h3>
           <div className="flex space-x-4 mt-2">
-            <a href="#" className="hover:text-white">Facebook</a>
-            <a href="#" className="hover:text-white">Twitter</a>
-            <a href="#" className="hover:text-white">LinkedIn</a>
-          </div>
+            <a href="https://www.facebook.com/dipto.ghosh.129794" className="hover:text-white">Facebook</a>
+            {/* <a href="#" className="hover:text-white">Twitter</a> */}
+            <a href="www.linkedin.com/in/dipto-dev" className="hover:text-white">LinkedIn</a>
+          </div>git
         </div>
       </div>
 
