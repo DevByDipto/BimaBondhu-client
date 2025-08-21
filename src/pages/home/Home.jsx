@@ -11,6 +11,7 @@ import NewsletterSubscription from "./NewsletterSubscription";
 import MeetOurAgents from "./MeetOurAgents";
 import HelmetTitle from "../../components/HelmetTitle";
 import { Link } from "react-router";
+import Features from "./Features";
 
 const slides = [
   
@@ -80,6 +81,8 @@ const HeroSlider = () => {
 <NewsletterSubscription></NewsletterSubscription>
 {/* MeetOurAgents */}
 <MeetOurAgents></MeetOurAgents>
+{/* Features */}
+<Features></Features>
 
    </section>
   );
