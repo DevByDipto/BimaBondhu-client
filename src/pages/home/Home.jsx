@@ -20,19 +20,19 @@ const slides = [
     id: 1,
     title: "Secure Your Tomorrow Today",
     subtitle: "Protect what matters most with BimaBondhu",
-    image: "https://i.ibb.co.com/7xPBLRZH/Orange-Simple-Photo-Complete-Family-With-Abstract-Minimalist-Lines-Financial-Policy-Banner.png",
+    image: "https://i.ibb.co.com/1Ywgth5G/towfiqu-barbhuiya-jpqyf-K7-GB4w-unsplash.jpg",
   },
   {
     id: 2,
     title: "Your Family, Our Priority",
     subtitle: "Affordable life insurance plans for every stage of life",
-    image: "https://i.ibb.co.com/hnc1Rtw/Green-and-White-Modern-Photocentric-Insurance-Presentation.png",
+    image: "https://i.ibb.co.com/DD9Nqhn3/pexels-kampus-8441861.jpg",
   },
   {
     id: 3,
     title: "Plan Smart, Live Free",
     subtitle: "Get expert guidance and custom policies",
-    image: "https://i.ibb.co.com/nNFCTHCY/pexels-leeloothefirst-7163938.jpg",
+    image: "https://i.ibb.co.com/chCRJbw2/tierra-mallorca-rg-J1-J8-SDEAY-unsplash.jpg",
   },
 ];
 
@@ -57,14 +57,14 @@ const HeroSlider = () => {
               }}
             >
               <div className=" bg-opacity-60 p-6 rounded-md max-w-xl text-white space-y-4">
-                {/* <h1 className="text-3xl md:text-5xl font-bold">{slide.title}</h1> */}
-                {/* <p className="text-lg md:text-xl">{slide.subtitle}</p> */}
-                {/* <Link
+                 <h1 className="text-3xl md:text-5xl font-bold">{slide.title}</h1> 
+                <p className="text-lg md:text-xl">{slide.subtitle}</p> 
+                 <Link
                   to="/allpolicies"
                   className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-lg font-semibold"
                 >
                   Get a Free Quote
-                </Link> */}
+                </Link> 
               </div>
             </div>
           </SwiperSlide>
