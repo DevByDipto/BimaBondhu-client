@@ -12,6 +12,7 @@ import MeetOurAgents from "./MeetOurAgents";
 import HelmetTitle from "../../components/HelmetTitle";
 import { Link } from "react-router";
 import Features from "./Features";
+import Blogs from "../blogs/Blogs";
 
 const slides = [
   
@@ -75,6 +76,7 @@ const HeroSlider = () => {
 <PopularPolicies></PopularPolicies>
 {/* LatestBlog */}
 <LatestBlog></LatestBlog>
+{/* <Blogs></Blogs> */}
 {/* Reviews */}
 <Reviews></Reviews>
 {/* NewsletterSubscription */}

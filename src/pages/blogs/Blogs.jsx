@@ -14,11 +14,11 @@ const Blogs = () => {
     },
   });
 
+  console.log({blogs});
   if (isLoading) return <p className="text-center">Loading...</p>;
 
     const handleReadMore = async (id) => {
         // console.log(id);
-        
     try {
       await axiosInstance.patch(`/blogs/${id}/increment-visit`);
       navigate(`/blogDetails/${id}`);
@@ -26,6 +26,7 @@ const Blogs = () => {
       console.error("Failed to increment visit count", error);
     }
   };
+// console.log(blogs);
 
 
   return (

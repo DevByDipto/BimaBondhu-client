@@ -1,18 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+
+import useAxios from '../../hooks/useAxios';
 
 const LatestBlog = () => {
-    const axiosInstance = useAxiosSecure()
+    const axiosInstance = useAxios()
     const navigate = useNavigate()
   const { data: blogs = [], isLoading } = useQuery({
     queryKey: ['latestBlogs'],
     queryFn: async () => {
       const res = await axiosInstance.get('/blogs');
+      // console.log({res},"axiosInstance response");
+      
       return res.data;
     },
   });
+// console.log({blogs});
 
   // ব্লগ গুলো ডেট অনুযায়ী sort করে latest ৪টা নিচ্ছি
   const latestBlogs = blogs

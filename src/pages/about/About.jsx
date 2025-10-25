@@ -6,7 +6,7 @@ const About = () => {
   
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-28 md:pt-32">
+    <div className="max-w-6xl mx-auto px-4 pt-8 md:pt-12">
       
       <h1 className="text-4xl font-bold text-center mb-10">
         About <span className="">BimaBondhu</span>
@@ -26,7 +26,7 @@ const About = () => {
         {/* Right: Image */}
         <div>
           <img
-            src="https://images.unsplash.com/photo-1598514982873-9db2d7b486c4"
+            src="https://i.ibb.co.com/TMWNsgKX/jakub-zerdzicki-GQn9-Gn-Mk-VQg-unsplash.jpg"
             alt="About BimaBondhu"
             className="rounded-2xl shadow-lg w-full h-auto object-cover"
           />

@@ -31,6 +31,7 @@ const [policiesData,setPoliciesData] = useState()
   });
 
   const totalPolicies = data?.total || 0;
+  // console.log({totalPolicies});
   const totalPages = Math.ceil(totalPolicies / limit);
 
    useEffect(()=>{
@@ -158,22 +159,35 @@ const handleSelect = async(e)=>{
           </div>
         </>
       )}
-      <div className="text-center mt-5">
+      <div className="text-center mt-5 space-x-2">
         <button
-          className="btn-primary mr-5"
-          disabled={page === 1}
+           className={`px-3 py-2 rounded-lg font-semibold transition-all duration-300 
+  ${
+    page === 1
+      ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+      : "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-indigo-600 hover:to-blue-500 text-white shadow-md hover:shadow-lg"
+  }`}
+          disabled={page === totalPages}
           onClick={() => setPage(page - 1)}
         >
-          Prev
+           ← Prev
         </button>
         {renderPageNumbers()}
-        <button
-          className="btn-primary mr-5"
-          disabled={page === totalPages}
-          onClick={() => policiesData.data.length >= 9 && setPage(page + 1)}
-        >
-          Next
-        </button>
+       <button
+  className={`px-3 py-2 rounded-lg font-semibold transition-all duration-300 
+  ${
+    page === totalPages
+      ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+      : "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-indigo-600 hover:to-blue-500 text-white shadow-md hover:shadow-lg"
+  }`}
+  disabled={page === totalPages}
+  onClick={() => policiesData.data.length >= 9 && setPage(page + 1)}
+>
+  {/* {console.log(page === totalPages,page,totalPages)} */}
+  
+  Next →
+</button>
+
       </div>
     </div>
     </section>
