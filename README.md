@@ -4,7 +4,7 @@
 It allows users to browse and filter insurance policies, generate personalized quotes, connect with agents, and apply for policies online.
 Customers can make secure payments, track applications, and manage approved policies, while admins and agents manage policy assignments and content.
 
----
+
 <!-- <img src="https://i.ibb.co.com/W4PBbjjV/Screenshot-2025-08-09-225322.png" alt="BimaBondhu" width="700"/> -->
 ---
 
