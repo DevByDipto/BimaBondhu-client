@@ -14,11 +14,15 @@ Customers can make secure payments, track applications, and manage approved poli
 
 ---
 
-## 🔑 Admin Login (Demo)
-```
-Email: admin@gmail.com
-Password: 123456Aa
-```
+### Admin Credentials
+- email: admin@gmail.com
+- pass: 123456Aa
+### Agent Credentials
+- email: 1agent@gmail.com
+- pass: 123456Aa
+### User Credentials
+- email: user@gmail.com
+- pass: 123456Aa
 
 ---
 
